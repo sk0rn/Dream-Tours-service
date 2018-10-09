@@ -170,40 +170,6 @@ public class DaoBackground<T> {
      * Исполняет запрос sql,
      * все значения из первой строки
      * результатов запроса (ResultSet resultSet)
-     * передаёт пушеру (pusher - функциональный интерфейс)
-     * в виде массива (Object[]).
-     * Остальные результаты запроса игнорируются.
-     * Возвращает true.
-     * <p>
-     * Если запрос ничего не вернул, или выполнен с ошибкой
-     * данный метод вернёт false.
-     * <p>
-     * Метод имеет парметр params: Object... params
-     * Если хотя бы одно значение передано, то будет использован PreparedStatement,
-     * и все значения params будут переданы в запрос.
-     * <p>
-     * Если параметров передано не было, то используется Statement
-     *
-     * @param pusher
-     * @param sql
-     * @param params
-     * @return
-     */
-    public static boolean fetchOneRowAsPojoObject(Consumer<Object[]> pusher, String sql, Object... params) {
-        Object[] fields = fetchOneRowAsObjArray(sql, params);
-
-        if (fields.length == 0) {
-            return false;
-        } else {
-            pusher.accept(fields);
-            return true;
-        }
-    }
-
-    /**
-     * Исполняет запрос sql,
-     * все значения из первой строки
-     * результатов запроса (ResultSet resultSet)
      * пушером (pojoPusher - функциональный интерфейс, задаётся в конструкторе)
      * загоняются в объект destPojo (передаётся в функцию в параметрах).
      * Остальные результаты запроса игнорируются.

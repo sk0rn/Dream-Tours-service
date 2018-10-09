@@ -5,9 +5,13 @@ import pojo.User;
 //просто для примера
 public interface IUserDao {
 
-    User get(Integer id);
+    boolean add(User user);
+
+    User getById(Integer id);
+
+    User getByLogin(String login);
 
     User[] getAll();
 
-    boolean set(User user, boolean updatePojo);
+    boolean update(User user);
 }

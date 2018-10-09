@@ -4,8 +4,8 @@ create table if not exists users
 		constraint users_pkey
 			primary key,
 	login varchar(250),
-	password varchar(40),
-	option integer,
+	pass varchar(40),
+	options integer,
 	fio varchar(250),
 	call_time timestamp,
 	subscribe boolean,
