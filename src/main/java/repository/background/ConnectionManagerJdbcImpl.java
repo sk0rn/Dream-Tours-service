@@ -1,6 +1,7 @@
 package repository.background;
 
 import org.apache.log4j.Logger;
+import utils.config.ConfigReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,11 +27,11 @@ public class ConnectionManagerJdbcImpl implements ConnectionManager {
     public Connection getConnection() {
         Connection connection = null;
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(ConfigReader.getDbDriver());
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/mobile",
-                    "postgres",
-                    "sa");
+                    ConfigReader.getDbUrl(),
+                    ConfigReader.getDbUser(),
+                    ConfigReader.getDbPass());
         } catch (ClassNotFoundException | SQLException e) {
             LOGGER.trace(CATCH_EXCEPTION, e);
         }
