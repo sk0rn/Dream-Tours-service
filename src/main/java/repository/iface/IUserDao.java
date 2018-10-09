@@ -1,5 +1,7 @@
 package repository.iface;
 
+import pojo.User;
+
 //просто для примера
 public interface IUserDao {
 

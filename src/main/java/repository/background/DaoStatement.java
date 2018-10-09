@@ -1,10 +1,11 @@
 package repository.background;
 
 import org.apache.log4j.Logger;
-import utils.consts.Consts;
 
 import java.io.Closeable;
 import java.sql.*;
+
+import static constants.Consts.CATCH_EXCEPTION;
 
 /**
  * декор. Скрывает работу с классами
@@ -70,7 +71,7 @@ public class DaoStatement implements Closeable {
             try {
                 statement.close();
             } catch (SQLException e) {
-                LOGGER.trace(Consts.CATCH_EXCEPTION, e);
+                LOGGER.trace(CATCH_EXCEPTION, e);
             }
         }
 
@@ -78,7 +79,7 @@ public class DaoStatement implements Closeable {
             try {
                 preparedStatement.close();
             } catch (SQLException e) {
-                LOGGER.trace(Consts.CATCH_EXCEPTION, e);
+                LOGGER.trace(CATCH_EXCEPTION, e);
             }
         }
 
@@ -86,7 +87,7 @@ public class DaoStatement implements Closeable {
             try {
                 connection.close();
             } catch (SQLException e) {
-                LOGGER.trace(Consts.CATCH_EXCEPTION, e);
+                LOGGER.trace(CATCH_EXCEPTION, e);
             }
         }
     }

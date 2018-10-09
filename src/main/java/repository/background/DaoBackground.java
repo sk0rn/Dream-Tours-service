@@ -11,6 +11,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
+import static constants.Consts.CATCH_EXCEPTION;
+
 /**
  * Утильный класс. Берёт на себя большую часть работы с запросами.
  * <p>
@@ -58,7 +60,7 @@ public class DaoBackground<T> {
      * и возвращает массив значений (Object[])
      *
      * @param source
-     * @return
+     * @return Object[]
      * @throws SQLException
      */
     private static Object[] internalObjArrayFromResultSet(ResultSet source) throws SQLException {
