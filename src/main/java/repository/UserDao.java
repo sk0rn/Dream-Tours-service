@@ -1,11 +1,12 @@
 package repository;
 
+import pojo.User;
 import repository.background.DaoBackground;
 import repository.iface.IUserDao;
 
 
 public class UserDao implements IUserDao {
-    private final static DaoBackground background = new DaoBackground(User::new,
+    private final static DaoBackground<User> background = new DaoBackground<>(User::new,
             User[]::new,
             User::init);
 
@@ -17,7 +18,7 @@ public class UserDao implements IUserDao {
     @Override
     public boolean set(User user, boolean updatePojo) {
         //param updatePojo unused in this example
-        return background.execute("update users set login=?, password=?, option=?, fio=?, call_time=?, subscribe=? where id=?", user);
+        return background.execute("update users set login=?, pass=?,option=?, fio=?, call_time=?, subscribe=? where id=?", user.getLogin(), user.getOption());
     }
 
     @Override

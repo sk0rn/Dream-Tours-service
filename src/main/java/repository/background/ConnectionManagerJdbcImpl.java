@@ -1,11 +1,12 @@
 package repository.background;
 
 import org.apache.log4j.Logger;
-import utils.consts.Consts;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import static constants.Consts.CATCH_EXCEPTION;
 
 public class ConnectionManagerJdbcImpl implements ConnectionManager {
     private static final Logger LOGGER = Logger.getLogger(ConnectionManagerJdbcImpl.class);
@@ -31,7 +32,7 @@ public class ConnectionManagerJdbcImpl implements ConnectionManager {
                     "postgres",
                     "sa");
         } catch (ClassNotFoundException | SQLException e) {
-            LOGGER.trace(Consts.CATCH_EXCEPTION, e);
+            LOGGER.trace(CATCH_EXCEPTION, e);
         }
         return connection;
     }
