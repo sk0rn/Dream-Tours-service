@@ -27,11 +27,11 @@ cache:
 before_install:
  - chmod +x gradlew
 
-#addons:
-#  sonarcloud:
-#    organization: "sk0rn-github"
-#    token:
-#      secure: "8ee9c2f0f42f9e0301b0a3d72839fba75c8a7353"
+addons:
+  sonarcloud:
+    organization: "sk0rn-github"
+    token:
+      secure: "7ce1b7683755213622534f07225b1482569449b5"
 
 
 script:
