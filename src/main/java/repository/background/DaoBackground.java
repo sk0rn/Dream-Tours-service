@@ -93,7 +93,7 @@ public class DaoBackground<T> {
 
             return statement.execute();
         } catch (SQLException e) {
-            LOGGER.trace(CATCH_EXCEPTION, e);
+            LOGGER.error(CATCH_EXCEPTION, e);
         }
         return false;
     }
@@ -241,24 +241,8 @@ public class DaoBackground<T> {
      * @return
      */
     public T[] fetchRowsAsPojoArray(String sql, Object... params) {
-        try (DaoStatement statement = new DaoStatement(sql, params);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            if (resultSet != null) {
-                List<T> pojoList = new ArrayList<>();
-
-                while (resultSet.next()) {
-                    pojoList.add(pojoMaker.apply(internalObjArrayFromResultSet(resultSet)));
-                }
-
-                return pojoList.toArray(pojoArrayMaker.apply(pojoList.size()));
-            } else {
-                return pojoArrayMaker.apply(0);
-            }
-        } catch (SQLException e) {
-            LOGGER.trace(CATCH_EXCEPTION, e);
-        }
-        return pojoArrayMaker.apply(0);
+        List<T> pojoList = fetchRowsAsPojoList(sql, params);
+        return pojoList.toArray(pojoArrayMaker.apply(pojoList.size()));
     }
 
     public List<T> fetchRowsAsPojoList(String sql, Object... params) {
