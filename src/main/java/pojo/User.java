@@ -12,7 +12,7 @@ public class User implements Initiable {
     private Integer option;
     private String fio;
     private java.sql.Timestamp callTime;
-    private String subscribe;
+    private Boolean subscribe;
     private Double bonus;
     private String albumGuid;
 
@@ -34,7 +34,7 @@ public class User implements Initiable {
         this.option = (Integer) fields[3];
         this.fio = (String) fields[4];
         this.callTime = (Timestamp) fields[5];
-        this.subscribe = (String) fields[6];
+        this.subscribe = (Boolean) fields[6];
         this.bonus = (Double) fields[7];
         this.albumGuid = (String) fields[8];
     }
@@ -87,11 +87,11 @@ public class User implements Initiable {
         this.callTime = callTime;
     }
 
-    public String getSubscribe() {
+    public Boolean getSubscribe() {
         return subscribe;
     }
 
-    public void setSubscribe(String subscribe) {
+    public void setSubscribe(Boolean subscribe) {
         this.subscribe = subscribe;
     }
 

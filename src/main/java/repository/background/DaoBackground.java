@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -170,40 +171,6 @@ public class DaoBackground<T> {
      * Исполняет запрос sql,
      * все значения из первой строки
      * результатов запроса (ResultSet resultSet)
-     * передаёт пушеру (pusher - функциональный интерфейс)
-     * в виде массива (Object[]).
-     * Остальные результаты запроса игнорируются.
-     * Возвращает true.
-     * <p>
-     * Если запрос ничего не вернул, или выполнен с ошибкой
-     * данный метод вернёт false.
-     * <p>
-     * Метод имеет парметр params: Object... params
-     * Если хотя бы одно значение передано, то будет использован PreparedStatement,
-     * и все значения params будут переданы в запрос.
-     * <p>
-     * Если параметров передано не было, то используется Statement
-     *
-     * @param pusher
-     * @param sql
-     * @param params
-     * @return
-     */
-    public static boolean fetchOneRowAsPojoObject(Consumer<Object[]> pusher, String sql, Object... params) {
-        Object[] fields = fetchOneRowAsObjArray(sql, params);
-
-        if (fields.length == 0) {
-            return false;
-        } else {
-            pusher.accept(fields);
-            return true;
-        }
-    }
-
-    /**
-     * Исполняет запрос sql,
-     * все значения из первой строки
-     * результатов запроса (ResultSet resultSet)
      * пушером (pojoPusher - функциональный интерфейс, задаётся в конструкторе)
      * загоняются в объект destPojo (передаётся в функцию в параметрах).
      * Остальные результаты запроса игнорируются.
@@ -292,5 +259,26 @@ public class DaoBackground<T> {
             LOGGER.trace(CATCH_EXCEPTION, e);
         }
         return pojoArrayMaker.apply(0);
+    }
+
+    public List<T> fetchRowsAsPojoList(String sql, Object... params) {
+        try (DaoStatement statement = new DaoStatement(sql, params);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet != null) {
+                List<T> pojoList = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    pojoList.add(pojoMaker.apply(internalObjArrayFromResultSet(resultSet)));
+                }
+
+                return pojoList;
+            } else {
+                return Collections.emptyList();
+            }
+        } catch (SQLException e) {
+            LOGGER.trace(CATCH_EXCEPTION, e);
+        }
+        return Collections.emptyList();
     }
 }
