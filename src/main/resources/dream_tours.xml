@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config>
+    <database driver="org.postgresql.Driver" url="jdbc:postgresql://localhost:5432/dream_tours" user="userName"
+              passw="password"/>
+    <albums root="./"/>
+</config>
