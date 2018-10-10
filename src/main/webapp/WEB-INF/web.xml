@@ -54,12 +54,12 @@
     <!--страница добавления администратором контента,
     связанного с турами и сами туры -->
     <servlet>
-        <servlet-name>content</servlet-name>
+        <servlet-name>add_content</servlet-name>
         <servlet-class>controller.admin.AddContentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>content</servlet-name>
-        <url-pattern>/admin/content</url-pattern>
+        <servlet-name>add_content</servlet-name>
+        <url-pattern>/admin/add_content</url-pattern>
     </servlet-mapping>
 
     <!--страница со списком всех туров, с полем поиска и применением-->
