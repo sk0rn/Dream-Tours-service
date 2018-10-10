@@ -190,7 +190,7 @@ create unique index if not exists tour_release_id_uindex
 	on tour_release (id)
 ;
 
-create table if not exists "Order"
+create table if not exists "orders"
 (
 	id serial not null
 		constraint "Order_pkey"

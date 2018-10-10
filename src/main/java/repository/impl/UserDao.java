@@ -1,8 +1,11 @@
-package repository;
+package repository.impl;
 
 import pojo.User;
 import repository.background.DaoBackground;
 import repository.iface.IUserDao;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class UserDao implements IUserDao {
     private final static DaoBackground<User> background = new DaoBackground<>(User::new,
@@ -28,8 +31,8 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public User[] getAll() {
-        return background.fetchRowsAsPojoArray("select * from users");
+    public List<User> getAll() {
+        return background.fetchRowsAsPojoList("select * from users");
     }
 
     @Override

@@ -22,4 +22,4 @@ hs_err_pid*
 src/main/resources/log4j.properties
 
 #quick test
-src/main/java/test
+src/main/java/test/

@@ -2,7 +2,8 @@ package repository.iface;
 
 import pojo.User;
 
-//просто для примера
+import java.util.List;
+
 public interface IUserDao {
 
     boolean add(User user);
@@ -11,7 +12,7 @@ public interface IUserDao {
 
     User getByLogin(String login);
 
-    User[] getAll();
+    List<User> getAll();
 
     boolean update(User user);
 }

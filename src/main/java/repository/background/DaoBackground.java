@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -258,5 +259,26 @@ public class DaoBackground<T> {
             LOGGER.trace(CATCH_EXCEPTION, e);
         }
         return pojoArrayMaker.apply(0);
+    }
+
+    public List<T> fetchRowsAsPojoList(String sql, Object... params) {
+        try (DaoStatement statement = new DaoStatement(sql, params);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet != null) {
+                List<T> pojoList = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    pojoList.add(pojoMaker.apply(internalObjArrayFromResultSet(resultSet)));
+                }
+
+                return pojoList;
+            } else {
+                return Collections.emptyList();
+            }
+        } catch (SQLException e) {
+            LOGGER.trace(CATCH_EXCEPTION, e);
+        }
+        return Collections.emptyList();
     }
 }
