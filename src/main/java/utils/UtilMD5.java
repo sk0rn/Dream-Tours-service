@@ -7,7 +7,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class UtilMD5 {
-
     private static final Logger LOGGER = Logger.getLogger(UtilMD5.class);
 
     private UtilMD5() {
