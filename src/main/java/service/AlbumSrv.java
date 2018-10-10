@@ -26,10 +26,26 @@ public class AlbumSrv implements IAlbumSrv {
         } else {
             return null;
         }
+        return null;
     }
 
     @Override
     public boolean writeFile(InputStream stream, String albumName, String fileName) {
+//        if (stream != null) {
+//            File album = Paths.get(ConfigReader.getAlbumsRoot(), albumName).toFile();
+//            album.mkdirs();
+//            if (album.exists() && album.isDirectory()) {
+//                try {
+//                    OutputStream out = new FileOutputStream(Paths.get(ConfigReader.getAlbumsRoot(), albumName, fileName).toFile());
+//                } catch (FileNotFoundException e) {
+//                    Logger.getLogger(AlbumSrv.class).error("Can't read file.", e);
+//                    e.printStackTrace();
+//                }
+//                //Files.wr
+//            }
+//
+//
+//        }
         return false;
     }
 }
