@@ -12,6 +12,7 @@ import java.nio.file.Paths;
  */
 public final class AlbumSrv {
     private AlbumSrv() {
+
     }
 
     public static InputStream readFile(String albumName, String fileName) {
