@@ -1749,7 +1749,7 @@
   }
 
   function getSize(axis, body, html, computedStyle) {
-    return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+    return Math.max(body['offset' + axis], body['scroll' + axis], html['customer' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
   }
 
   function getWindowSizes() {
@@ -1835,11 +1835,11 @@
   }
 
   /**
-   * Get bounding client rect of given element
+   * Get bounding customer rect of given element
    * @method
    * @memberof Popper.Utils
    * @param {HTMLElement} element
-   * @return {Object} client rect
+   * @return {Object} customer rect
    */
   function getBoundingClientRect(element) {
     var rect = {};
