@@ -4,7 +4,6 @@ import pojo.Contact;
 import repository.background.DaoBackground;
 import repository.iface.IContactDao;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ContactDao implements IContactDao {
@@ -19,15 +18,15 @@ public class ContactDao implements IContactDao {
     }
 
     @Override
-    public List<Contact> getAllByUserId(Integer id) {
+    public List<Contact> getAllByUserId(Integer userid) {
         return background.fetchRowsAsPojoList("SELECT * FROM contact " +
-                "WHERE client_id=?", id);
+                "WHERE client_id=?", userid);
     }
 
     @Override
     public boolean updateById(Contact contact) {
-        return background.execute("Update contact SET value=? where id=?",
-                contact.getValue(), contact.getId());
+        return background.execute("Update contact SET client_id =?, value=? where id=?",
+                contact.getClientId(), contact.getValue(), contact.getId());
     }
 
     @Override

@@ -71,7 +71,7 @@ public class DaoStatement implements Closeable {
             try {
                 statement.close();
             } catch (SQLException e) {
-                LOGGER.trace(CATCH_EXCEPTION, e);
+                LOGGER.error(CATCH_EXCEPTION, e);
             }
         }
 
@@ -79,7 +79,7 @@ public class DaoStatement implements Closeable {
             try {
                 preparedStatement.close();
             } catch (SQLException e) {
-                LOGGER.trace(CATCH_EXCEPTION, e);
+                LOGGER.error(CATCH_EXCEPTION, e);
             }
         }
 
@@ -87,7 +87,7 @@ public class DaoStatement implements Closeable {
             try {
                 connection.close();
             } catch (SQLException e) {
-                LOGGER.trace(CATCH_EXCEPTION, e);
+                LOGGER.error(CATCH_EXCEPTION, e);
             }
         }
     }
