@@ -5,10 +5,10 @@ install: true
 dist: trusty
 
 jdk:
-  - openjdk8
+  - oraclejdk8
 
 os:
-  - windows
+  - linux
 
 branches:
   only:
