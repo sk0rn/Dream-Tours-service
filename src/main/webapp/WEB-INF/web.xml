@@ -86,6 +86,15 @@
         <servlet-name>tour_detail</servlet-name>
         <url-pattern>/tour/detail/id/</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>images</servlet-name>
+        <servlet-class>controller.AlbumServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>images</servlet-name>
+        <url-pattern>/images/*</url-pattern>
+    </servlet-mapping>
 
     <!--===================Фильтры===================-->
 

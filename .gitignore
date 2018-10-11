@@ -29,3 +29,6 @@ src/main/java/test/
 
 #config
 src/main/resources/dream_tours.xml
+
+#resources
+/res
