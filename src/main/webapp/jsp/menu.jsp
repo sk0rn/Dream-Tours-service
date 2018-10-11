@@ -7,37 +7,34 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
     <div class="dropdown navbar-brand">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            Войдите.
-        </button>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-            <%
-                Integer options = (Integer) request.getAttribute("options");
-                if (options == null) {
-                    //Кто угодно
-            %>
-            <%@include file="/jsp/guestMenu.jsp" %>
-            <%
-            } else if (options == 0) {
-                //Клиент
-            %>
-            <%@include file="/jsp/clientMenu.jsp" %>
-            <%
-            } else {
-                //Сотрудник
-            %>
-            <%@include file="/jsp/employeeMenu.jsp" %>
-            <%
-                }
-            %>
-        </div>
+        <%
+            Integer options = (Integer) request.getSession().getAttribute("options");
+            if (options == null) {
+                //Кто угодно
+        %>
+        <%@include file="guestMenu.jsp" %>
+        <%
+        } else if (options == 0) {
+            //Клиент
+        %>
+        <%@include file="clientMenu.jsp" %>
+        <%
+        } else if (options == 1) {
+            //Сотрудник
+        %>
+        <%@include file="employeeMenu.jsp" %>
+        <%
+        } else {
+            //Кто угодно
+        %>
+        <%@include file="guestMenu.jsp" %>
+        <%
+            }
+        %>
     </div>
 
+    <!-- эта кнопка будет видна, когда для меню не хватит места -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

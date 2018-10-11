@@ -19,7 +19,7 @@ public class ToursServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("options", null);
+        req.getSession().setAttribute("options", null);
         req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
     }
 }
