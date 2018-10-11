@@ -15,7 +15,10 @@
 hs_err_pid*
 
 # idea files
-.idea/*
+/.idea/*
+/.gradle
+/build
+/out
 *.iml
 
 #log4j prop
