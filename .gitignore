@@ -15,7 +15,10 @@
 hs_err_pid*
 
 # idea files
-.idea/*
+/.idea/*
+/.gradle
+/build
+/out
 *.iml
 
 #log4j prop
@@ -25,4 +28,4 @@ src/main/resources/log4j.properties
 src/main/java/test/
 
 #config
-dream_tours.xml
+src/main/resources/dream_tours.xml

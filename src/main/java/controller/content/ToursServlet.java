@@ -1,7 +1,6 @@
 package controller.content;
 
-import service.impl.TourSrv;
-import utils.config.ConfigReader;
+import service.tour.impl.TourSrv;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +19,6 @@ public class ToursServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ConfigReader.getAlbumsRoot();
-        req.getContextPath();
         req.getSession().setAttribute("options", null);
         req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
     }
