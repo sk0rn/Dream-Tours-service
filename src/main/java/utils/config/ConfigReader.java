@@ -37,8 +37,8 @@ public class ConfigReader {
             DocumentBuilder builder = null;
             try {
                 builder = factory.newDocumentBuilder();
-                Document document = builder.parse(new File("D:\\dev_edu\\STC13_HT\\" +
-                        "Lab02_DreamTours\\src\\main\\resources\\dream_tours.xml"));
+                Document document = builder.parse(new File("D:\\Innopolis\\IntelliJ_IDEA\\" +
+                        "Dream-Tours-service\\src\\main\\resources\\dream_tours.xml"));
                 NodeList nodes = document.getChildNodes().item(0).getChildNodes();
                 Node node;
 
