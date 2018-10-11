@@ -10,6 +10,6 @@ public class GuestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("guestMenu.jsp").forward(req, resp);
+        //req.getRequestDispatcher("guestMenu.jsp").forward(req, resp);
     }
 }

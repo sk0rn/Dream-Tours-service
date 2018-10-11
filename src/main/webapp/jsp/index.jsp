@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Меню сотрудника</title>
-</head>
+<%@include file="headTag.jsp" %>
 <body>
-
+<%@include file="menu.jsp" %>
+<%@include file="body.jsp" %>
+<%@include file="tail.jsp" %>
 </body>
 </html>
