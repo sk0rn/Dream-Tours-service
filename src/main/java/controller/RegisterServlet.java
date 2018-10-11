@@ -26,7 +26,8 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/registerBody.jsp").forward(req, resp);
+        req.setAttribute("allRequestsAnswer", "/register");
+        req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
     }
 
     @Override
@@ -45,7 +46,8 @@ public class RegisterServlet extends HttpServlet {
                     Contact contactEmail = new Contact(null, userId, email);
                     contactSrv.add(contactPhone);
                     contactSrv.add(contactEmail);
-                    req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
+                    resp.sendRedirect("/?infoCode=okRegister");
+                    resp.sendRedirect("/tour");
                 } else {
                     resp.sendRedirect("/register?errorCode=errPhone");
                 }
@@ -55,6 +57,5 @@ public class RegisterServlet extends HttpServlet {
         } else {
             resp.sendRedirect("/register?errorCode=errLogin");
         }
-
     }
 }
