@@ -2,8 +2,8 @@ package controller;
 
 import pojo.Contact;
 import pojo.User;
-import service.impl.ContactSrv;
-import service.impl.UserSrv;
+import service.user.impl.ContactSrv;
+import service.user.impl.UserSrv;
 import utils.CheckUserData;
 import utils.UtilMD5;
 
