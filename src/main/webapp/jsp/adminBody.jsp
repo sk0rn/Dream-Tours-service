@@ -20,7 +20,7 @@
                aria-controls="v-pills-call" aria-selected="false">Обратная связь</a>
         </div>
     </div>
-    <div class="col-9">
+    <div class="col-8">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
                 <form action="" method="">
