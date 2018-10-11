@@ -9,7 +9,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -35,8 +34,9 @@ public class ConfigReader {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = null;
             try {
+                ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
                 builder = factory.newDocumentBuilder();
-                Document document = builder.parse(new File("dream_tours.xml"));
+                Document document = builder.parse(classLoader.getResourceAsStream("dream_tours.xml"));
                 NodeList nodes = document.getChildNodes().item(0).getChildNodes();
                 Node node;
 
