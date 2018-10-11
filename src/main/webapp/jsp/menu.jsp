@@ -17,27 +17,22 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
             <%
-                switch ((Integer) request.getAttribute("options")) {
-                    //Клиент
-                    case 0:
+                Integer options = (Integer) request.getAttribute("options");
+                if (options == null) {
+                    //Кто угодно
             %>
-            <%@include file="clientMenu.jsp" %>
+            <%@include file="/jsp/guestMenu.jsp" %>
             <%
-                    break;
-
+            } else if (options == 0) {
+                //Клиент
+            %>
+            <%@include file="/jsp/clientMenu.jsp" %>
+            <%
+            } else {
                 //Сотрудник
-                case 1:
             %>
-            <%@include file="employeeMenu.jsp" %>
+            <%@include file="/jsp/employeeMenu.jsp" %>
             <%
-                    break;
-
-                //Кто угодно
-                default:
-            %>
-            <%@include file="guestMenu.jsp" %>
-            <%
-                        break;
                 }
             %>
         </div>

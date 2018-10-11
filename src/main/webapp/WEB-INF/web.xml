@@ -72,6 +72,10 @@
         <servlet-name>tours</servlet-name>
         <url-pattern>/tours</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tours</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
     <!--подробная информация о каждом туре-->
     <servlet>
