@@ -12,7 +12,7 @@
             %>
             <a style="color: red">Пользователь с данным логином уже существует!</a>
             <%}%>
-            <br><input class="form-control" type="text" placeholder="логин" required name="login" width="500px;">
+            <br><input class="form-control" type="text" placeholder="логин" required name="login">
             <br>
             <%
                 if (("" + request.getParameter("errorCode")).equals("errPass")) {
@@ -21,7 +21,7 @@
             <%}%>
             <br>
             <div class="form-group">
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль" required
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="пароль" required
                        name="pass">
                 <small id="passwordHelpInline" class="text-muted">
                     Минимальная длина 8 символов (минимум 2 строчные буквы, 2 заглавные буквы, 2 цифры)
