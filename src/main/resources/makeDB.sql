@@ -58,6 +58,7 @@ create table if not exists tour
 	id serial not null
 		constraint tour_pkey
 			primary key,
+	name varchar(250),
 	album_guid char(40),
 	youtube_url varchar(50),
 	"desc" text
@@ -164,7 +165,8 @@ create table if not exists tour_coast
 				on update cascade,
 	kind boolean,
 	coast double precision,
-	clippino_age integer
+	clippino_age integer,
+	is_participant boolean
 )
 ;
 

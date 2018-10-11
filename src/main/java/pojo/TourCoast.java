@@ -9,6 +9,7 @@ public class TourCoast implements Initiable {
     private String kind;
     private Double coast;
     private Integer clippingAge;
+    private Boolean isParticipant;
 
     public TourCoast() {
     }
@@ -19,7 +20,7 @@ public class TourCoast implements Initiable {
 
     @Override
     public void init(Object... fields) {
-        if (fields == null || fields.length != 5) {
+        if (fields == null || fields.length != 6) {
             throw new InvalidNumberOfArgumentsException();
         }
         this.id = (Integer) fields[0];
@@ -27,6 +28,7 @@ public class TourCoast implements Initiable {
         this.kind = (String) fields[2];
         this.coast = (Double) fields[3];
         this.clippingAge = (Integer) fields[4];
+        this.isParticipant = (Boolean) fields[5];
     }
 
     public Integer getId() {
@@ -69,6 +71,14 @@ public class TourCoast implements Initiable {
         this.clippingAge = clippingAge;
     }
 
+    public Boolean getParticipant() {
+        return isParticipant;
+    }
+
+    public void setParticipant(Boolean participant) {
+        isParticipant = participant;
+    }
+
     @Override
     public String toString() {
         return "TourCoast{" +
@@ -77,6 +87,7 @@ public class TourCoast implements Initiable {
                 ", kind='" + kind + '\'' +
                 ", coast=" + coast +
                 ", clippingAge=" + clippingAge +
+                ", isParticipant=" + isParticipant +
                 '}';
     }
 }

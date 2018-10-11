@@ -5,6 +5,7 @@ import utils.exceptions.InvalidNumberOfArgumentsException;
 
 public class Tour implements Initiable {
     private Integer id;
+    private String name;
     private String albumGuid;
     private String youtubeUrl;
     private String desc;
@@ -18,13 +19,14 @@ public class Tour implements Initiable {
 
     @Override
     public void init(Object... fields) {
-        if (fields == null || fields.length != 4) {
+        if (fields == null || fields.length != 5) {
             throw new InvalidNumberOfArgumentsException();
         }
         this.id = (Integer) fields[0];
-        this.albumGuid = (String) fields[1];
-        this.youtubeUrl = (String) fields[2];
-        this.desc = (String) fields[3];
+        this.name = (String) fields[1];
+        this.albumGuid = (String) fields[2];
+        this.youtubeUrl = (String) fields[3];
+        this.desc = (String) fields[4];
     }
 
     public Integer getId() {
@@ -33,6 +35,14 @@ public class Tour implements Initiable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAlbumGuid() {
@@ -63,6 +73,7 @@ public class Tour implements Initiable {
     public String toString() {
         return "Tour{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", albumGuid='" + albumGuid + '\'' +
                 ", youtubeUrl='" + youtubeUrl + '\'' +
                 ", desc='" + desc + '\'' +
