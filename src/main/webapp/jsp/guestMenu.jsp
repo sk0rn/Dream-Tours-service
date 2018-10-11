@@ -12,15 +12,14 @@
 </button>
 
 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
     <form class="px-4 py-3" action="/login" method="post">
     <div class="form-group">
         <label for="exampleDropdownFormEmail1">Логин</label>
-        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="login">
+        <input type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="login" name="login">
     </div>
     <div class="form-group">
         <label for="exampleDropdownFormPassword1">Пароль</label>
-        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="password">
+        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="password" name="password">
     </div>
     <button type="submit" class="btn btn-primary">Войти</button>
     <div class="dropdown-divider"></div>

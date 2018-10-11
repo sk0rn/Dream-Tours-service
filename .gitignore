@@ -28,4 +28,4 @@ src/main/resources/log4j.properties
 src/main/java/test/
 
 #config
-dream_tours.xml
+src/main/resources/dream_tours.xml
