@@ -4,7 +4,6 @@ import pojo.User;
 import repository.background.DaoBackground;
 import repository.iface.IUserDao;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class UserDao implements IUserDao {

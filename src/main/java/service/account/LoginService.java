@@ -22,7 +22,7 @@ public class LoginService implements ILoginService {
      * @return null if user not found or exception,
      * 0 if client,
      * 1 if employee
-     * */
+     */
     @Override
     public Integer getRole(String login) {
         User user;
@@ -38,7 +38,7 @@ public class LoginService implements ILoginService {
     public boolean checkAuth(String login, String password) {
         User user;
         if (login != null && password != null) {
-            user =  userDao.getByLogin(login);
+            user = userDao.getByLogin(login);
             if (user != null) {
                 return user.getPassword().equals(UtilMD5.md5Custom(password));
             } else {
