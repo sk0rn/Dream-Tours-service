@@ -1,6 +1,6 @@
 package controller.content;
 
-import service.impl.TourSrv;
+import service.tour.impl.TourSrv;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
