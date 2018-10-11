@@ -19,7 +19,8 @@
     </div>
     <div class="form-group">
         <label for="exampleDropdownFormPassword1">Пароль</label>
-        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="password" name="password">
+        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="password"
+               name="password">
     </div>
     <button type="submit" class="btn btn-primary">Войти</button>
     <div class="dropdown-divider"></div>
