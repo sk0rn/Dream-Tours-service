@@ -52,7 +52,6 @@ public class DaoStatement implements Closeable {
         }
     }
 
-
     ResultSet executeQuery() throws SQLException {
         if (preparedStatement != null) return preparedStatement.executeQuery();
         else if (statement != null) return statement.executeQuery(sql);
