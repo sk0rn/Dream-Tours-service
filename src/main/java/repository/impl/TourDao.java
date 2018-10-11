@@ -13,8 +13,8 @@ public class TourDao implements ITourDao {
 
     @Override
     public boolean add(Tour tour) {
-        return background.execute("INSERT INTO tour VALUES (Default, ?, ?, ?)",
-                tour.getAlbumGuid(), tour.getYoutubeUrl(), tour.getDesc());
+        return background.execute("INSERT INTO tour VALUES (Default, ?, ?, ?, ?)",
+                tour.getName(), tour.getAlbumGuid(), tour.getYoutubeUrl(), tour.getDesc());
     }
 
     @Override
@@ -51,8 +51,8 @@ public class TourDao implements ITourDao {
 
     @Override
     public boolean update(Tour tour) {
-        return background.execute("Update tour SET album_guid =?, youtube_url=?, desc=? where id=?",
-                tour.getAlbumGuid(), tour.getYoutubeUrl(), tour.getDesc(), tour.getId());
+        return background.execute("Update tour SET name=? album_guid =?, youtube_url=?, desc=? where id=?",
+                tour.getName(), tour.getAlbumGuid(), tour.getYoutubeUrl(), tour.getDesc(), tour.getId());
     }
 
     @Override

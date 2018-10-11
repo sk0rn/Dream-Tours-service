@@ -13,9 +13,9 @@ public class TourCoastDao implements ITourCoastDao {
 
     @Override
     public boolean add(TourCoast tourCoast) {
-        return background.execute("INSERT INTO tour_coast VALUES (Default, ?, ?, ?, ?)",
+        return background.execute("INSERT INTO tour_coast VALUES (Default, ?, ?, ?, ?, ?)",
                 tourCoast.getTourDurationId(), tourCoast.getKind(), tourCoast.getCoast(),
-                tourCoast.getClippingAge());
+                tourCoast.getClippingAge(), tourCoast.getParticipant());
     }
 
     @Override
@@ -27,9 +27,9 @@ public class TourCoastDao implements ITourCoastDao {
     @Override
     public boolean updateById(TourCoast tourCoast) {
         return background.execute("Update tour_coast SET tour_duration_id=?, kind=?," +
-                        " coast=?, clippino_age=? where id=?",
+                        " coast=?, clippino_age=?, isParticipant=? where id=?",
                 tourCoast.getTourDurationId(), tourCoast.getKind(), tourCoast.getCoast(),
-                tourCoast.getClippingAge(), tourCoast.getId());
+                tourCoast.getClippingAge(), tourCoast.getParticipant(), tourCoast.getId());
     }
 
     @Override
