@@ -1,7 +1,7 @@
 package controller.admin;
 
-import service.impl.OrderSrv;
-import service.impl.UserSrv;
+import service.user.impl.OrderSrv;
+import service.user.impl.UserSrv;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

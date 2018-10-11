@@ -1,7 +1,7 @@
 package controller.admin;
 
-import service.iface.*;
-import service.impl.*;
+import service.tour.iface.*;
+import service.tour.impl.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

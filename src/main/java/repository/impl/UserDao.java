@@ -43,5 +43,4 @@ public class UserDao implements IUserDao {
                 user.getOption(), user.getFio(), user.getCallTime(), user.getSubscribe(),
                 user.getBonus(), user.getAlbumGuid(), user.getId());
     }
-
 }
