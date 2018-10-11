@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constants.Consts.LOGIN;
+
 public class LoginServlet extends HttpServlet {
     private ILoginService loginService;
 
@@ -26,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             req.getSession().invalidate();
         }
         // если уже залогинены
-        if (req.getSession().getAttribute("login") != null) {
+        if (req.getSession().getAttribute(LOGIN) != null) {
             resp.sendRedirect("/tours");
         } else {
             req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
@@ -36,11 +38,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String login = req.getParameter("login");
+        String login = req.getParameter(LOGIN);
         String password = req.getParameter("password");
         if (loginService.checkAuth(login, password)) {
             Integer role = loginService.getRole(login);
-            req.getSession().setAttribute("login", login);
+            req.getSession().setAttribute(LOGIN, login);
             req.getSession().setAttribute("option", role);
             System.out.println(role);
             resp.sendRedirect("/tours");
@@ -48,15 +50,5 @@ public class LoginServlet extends HttpServlet {
             // если логин не найден
             resp.sendRedirect("/?errorCode=wrongLogin");
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
     }
 }
