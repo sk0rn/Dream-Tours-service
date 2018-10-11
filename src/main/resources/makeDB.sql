@@ -3,11 +3,11 @@ create table if not exists users
 	id serial not null
 		constraint users_pkey
 			primary key,
-	login varchar(250),
-	pass varchar(40),
+	login varchar(250) NOT NULL UNIQUE,
+	pass varchar(40) NOT NULL UNIQUE,
 	options integer,
-	fio varchar(250),
-	call_time timestamp,
+	fio varchar(250) NOT NULL UNIQUE,
+	call_time timestamp NOT NULL,
 	subscribe boolean,
 	bonus double precision,
 	album_guid varchar(40)
@@ -15,7 +15,7 @@ create table if not exists users
 ;
 
 create unique index if not exists users_id_uindex
-	on users (id)
+ 	on users (id)
 ;
 
 create table if not exists contact
@@ -44,8 +44,8 @@ create table if not exists document
 		constraint document_users_id_fk
 			references users
 				on update cascade,
-	file_name varchar(250),
-	doc_type varchar(250)
+	file_name varchar(250) NOT NULL UNIQUE,
+	doc_type varchar(250) NOT NULL UNIQUE
 )
 ;
 
@@ -55,11 +55,11 @@ create unique index if not exists document_id_uindex
 
 create table if not exists tour
 (
-	id serial not null
+	id serial not null UNIQUE
 		constraint tour_pkey
 			primary key,
-	name varchar(250),
-	album_guid char(40),
+	name varchar(250) NOT NULL,
+	album_guid char(40) NOT NULL,
 	youtube_url varchar(50),
 	"desc" text
 )
@@ -101,7 +101,7 @@ create table if not exists place
 	id serial not null
 		constraint place_pkey
 			primary key,
-	name varchar(250),
+	name varchar(250) NOT NULL UNIQUE,
 	"desc" text
 )
 ;
@@ -159,12 +159,12 @@ create table if not exists tour_coast
 	id serial not null
 		constraint tour_coast_pkey
 			primary key,
-	tour_duration_id integer
+	tour_duration_id integer NOT NULL
 		constraint tour_coast_tour_duration_id_fk
 			references tour_duration
 				on update cascade,
 	kind boolean,
-	coast double precision,
+	coast double precision NOT NULL,
 	clippino_age integer,
 	is_participant boolean
 )
@@ -183,7 +183,7 @@ create table if not exists tour_release
 		constraint tour_release_tour_duration_id_fk
 			references tour_duration
 				on update cascade,
-	begin_time timestamp,
+	begin_time timestamp NOT NULL UNIQUE,
 	capacity integer
 )
 ;
@@ -194,24 +194,24 @@ create unique index if not exists tour_release_id_uindex
 
 create table if not exists "orders"
 (
-	id serial not null
+	id serial not null UNIQUE
 		constraint "Order_pkey"
 			primary key,
 	user_id integer
 		constraint order_users_id_fk
 			references users
 				on update cascade,
-	tour_release_id integer
+	tour_release_id integer NOT NULL UNIQUE
 		constraint order_tour_release_id_fk
 			references tour_release
 				on update cascade,
-	coast double precision,
+	coast double precision NOT NULL UNIQUE,
 	status integer
 )
 ;
 
 create unique index if not exists order_id_uindex
-	on "Order" (id)
+	on "orders" (id)
 ;
 
 create table if not exists participant
@@ -221,10 +221,10 @@ create table if not exists participant
 			primary key,
 	order_id integer
 		constraint participant_order_id_fk
-			references "Order"
+			references "orders"
 				on update cascade,
 	clipping_age integer,
-	quantity integer
+	quantity integer NOT NULL
 )
 ;
 
