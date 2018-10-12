@@ -22,4 +22,9 @@ public class TourSubjectDao implements ITourSubjectDao {
         return background.fetchRowsAsPojoList("SELECT * FROM tour_subject " +
                 "WHERE tour_id=? and subject_id = ?", tourid, subjectId);
     }
+
+    @Override
+    public List<TourSubject> getAll() {
+        return background.fetchRowsAsPojoList("SELECT * FROM tour_subject");
+    }
 }

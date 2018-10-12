@@ -5,6 +5,7 @@
     <form action="" method="post">
         <%
             List<Tour> tourList = (List<Tour>) request.getAttribute("ИМЯ АТРИБУТА");
+            if(tourList != null)
             for (Tour i : tourList) {
         %>
         <div class="col-12" align="left">

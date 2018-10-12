@@ -1,5 +1,8 @@
 package controller.content;
 
+import pojo.TourExtend;
+import service.impl.TourExtendSrv;
+import service.tour.iface.ITourExtendSrv;
 import service.tour.impl.SubjectSrv;
 import service.tour.impl.TourSrv;
 
@@ -8,22 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class ToursServlet extends HttpServlet {
-    private TourSrv tourSrv;
-    private SubjectSrv subjectSrv;
+    private ITourExtendSrv tourExtendSrv;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        tourSrv = new TourSrv();
-        subjectSrv = new SubjectSrv();
+        tourExtendSrv = new TourExtendSrv();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("allRequestsAnswer", "/tours");
-        req.setAttribute("subjects", subjectSrv.getAll());
-        req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
+        Map<Integer, TourExtend> tours = tourExtendSrv.getAll();
+        req.setAttribute("tour_list", tours);
+        req.getRequestDispatcher("/jsp/indexTours.jsp").forward(req, resp);
     }
 }
