@@ -47,7 +47,6 @@ public class RegisterServlet extends HttpServlet {
                     contactSrv.add(contactPhone);
                     contactSrv.add(contactEmail);
                     resp.sendRedirect("/?infoCode=okRegister");
-                    resp.sendRedirect("/tour");
                 } else {
                     resp.sendRedirect("/register?errorCode=errPhone");
                 }
