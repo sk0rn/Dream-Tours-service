@@ -35,7 +35,7 @@
             <br>
             <input class="form-control" type="text" placeholder="телефон" required name="phone">
             <small id="phoneHelpInline" class="text-muted">
-                Длина 8 цифр
+                Длина 11 цифр
             </small>
             <br><br>
             <div class="form-group">
