@@ -10,7 +10,7 @@
 <%@include file="headTag.jsp" %>
 <body>
 <%@include file="menu.jsp" %>
-<%@include file="body2.jsp" %>
+<%@include file="body.jsp" %>
 <%@include file="tail.jsp" %>
 </body>
 </html>
