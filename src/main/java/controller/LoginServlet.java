@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         if (loginService.checkAuth(login, password)) {
             Integer role = loginService.getRole(login);
             req.getSession().setAttribute("login", login);
-            req.getSession().setAttribute("option", role);
+            req.getSession().setAttribute("options", role);
             System.out.println(role);
             resp.sendRedirect("/tours");
         } else {

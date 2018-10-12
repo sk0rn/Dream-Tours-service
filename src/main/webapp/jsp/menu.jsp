@@ -7,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="/tour" method="post">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="dropdown navbar-brand">
             <%
@@ -88,4 +87,3 @@
             </form>
         </div>
     </nav>
-</form>
