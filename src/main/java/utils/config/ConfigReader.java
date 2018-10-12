@@ -19,17 +19,19 @@ import java.io.IOException;
  */
 public class ConfigReader {
     private static boolean read = false;
-    private static String dbDriver;
-    private static String dbUrl;
-    private static String dbUser;
-    private static String dbPass;
-    private static String albumsRoot;
+    private static String dbDriver = "org.postgresql.Driver";
+    private static String dbUrl = "jdbc:postgresql://localhost:5432/dream_tours";
+    private static String dbUser = "dream";
+    private static String dbPass = "tours";
+    private static String albumsRoot = "c:\\temp\\";
 
     private ConfigReader() {
 
     }
 
     private static void readConfig() {
+        if (true) return;
+
         if (!read) {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = null;
