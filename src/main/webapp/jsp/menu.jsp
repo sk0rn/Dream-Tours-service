@@ -56,7 +56,7 @@
                         <%
                             List<Subject> subjects = (List<Subject>) request.getAttribute("subjects");
 
-                            if (subjects.size() > 0) {
+                            if (subjects != null && subjects.size() > 0) {
                                 for (Subject subject : subjects) {
                         %><a class="dropdown-item" href="#"
                              onclick="document.getElementById('subjectDropdown').innerText = '<%=subject.getName()%>';document.getElementById('searchSubject').value = <%=subject.getId()%>;"><%=subject.getName()%>
