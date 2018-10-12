@@ -1,4 +1,5 @@
-<%--
+<%@ page import="pojo.Subject" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Skazzka
   Date: 10.10.2018
@@ -6,41 +7,42 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="dropdown navbar-brand">
-        <%
-            Integer options = (Integer) request.getSession().getAttribute("options");
-            if (options == null) {
+<form action="/tour" method="post">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="dropdown navbar-brand">
+            <%
+                Integer options = (Integer) request.getSession().getAttribute("options");
+                if (options == null) {
+                    //Кто угодно
+            %>
+            <%@include file="guestMenu.jsp" %>
+            <%
+            } else if (options == 0) {
+                //Клиент
+            %>
+            <%@include file="clientMenu.jsp" %>
+            <%
+            } else if (options == 1) {
+                //Сотрудник
+            %>
+            <%@include file="employeeMenu.jsp" %>
+            <%
+            } else {
                 //Кто угодно
-        %>
-        <%@include file="guestMenu.jsp" %>
-        <%
-        } else if (options == 0) {
-            //Клиент
-        %>
-        <%@include file="clientMenu.jsp" %>
-        <%
-        } else if (options == 1) {
-            //Сотрудник
-        %>
-        <%@include file="employeeMenu.jsp" %>
-        <%
-        } else {
-            //Кто угодно
-        %>
-        <%@include file="guestMenu.jsp" %>
-        <%
-            }
-        %>
-    </div>
+            %>
+            <%@include file="guestMenu.jsp" %>
+            <%
+                }
+            %>
+        </div>
 
-    <!-- эта кнопка будет видна, когда для меню не хватит места -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- эта кнопка будет видна, когда для меню не хватит места -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <form class="form-inline my-2 my-lg-0">
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
@@ -49,23 +51,21 @@
                        aria-haspopup="true" aria-expanded="false">
                         Тематика
                     </a>
+                    <input type="hidden" id="searchSubject" name="searchSubject" value="-1">
                     <div class="dropdown-menu" aria-labelledby="subjectDropdown">
                         <%
-                            /*
-                            List<Subject> subjects = (List<Subject>) request.getSession().getAttribute("subjects");
+                            List<Subject> subjects = (List<Subject>) request.getAttribute("subjects");
 
-                            if(subjects.size() > 0){
-                                for (Subject subj:subjects){
-
-                                }
-                            }else{
-                            */
-                        %><a class="dropdown-item" href="#">Пусто</a><%
-                        //}
+                            if (subjects.size() > 0) {
+                                for (Subject subject : subjects) {
+                        %><a class="dropdown-item" href="#"
+                             onclick="document.getElementById('subjectDropdown').innerText = '<%=subject.getName()%>';document.getElementById('searchSubject').value = <%=subject.getId()%>;"><%=subject.getName()%>
+                    </a><%
+                        }
+                    } else {
+                    %><a class="dropdown-item" href="#">Пусто</a><%
+                        }
                     %>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
 
@@ -82,8 +82,10 @@
                 </li>
             </ul>
 
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+            </form>
         </div>
-    </form>
-</nav>
+    </nav>
+</form>

@@ -86,7 +86,7 @@
         <servlet-name>tour_detail</servlet-name>
         <url-pattern>/tour/detail/id/</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>images</servlet-name>
         <servlet-class>controller.AlbumServlet</servlet-class>
