@@ -1,10 +1,8 @@
 package controller.content;
 
 import pojo.TourExtend;
-import service.impl.TourExtendSrv;
+import service.tour.impl.TourExtendSrv;
 import service.tour.iface.ITourExtendSrv;
-import service.tour.impl.SubjectSrv;
-import service.tour.impl.TourSrv;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

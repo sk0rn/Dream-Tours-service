@@ -1,4 +1,4 @@
-package service.impl;
+package service.tour.impl;
 
 import pojo.*;
 import repository.iface.*;
