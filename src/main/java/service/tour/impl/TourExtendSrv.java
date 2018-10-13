@@ -5,6 +5,8 @@ import repository.iface.*;
 import repository.impl.*;
 import service.tour.iface.ITourExtendSrv;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -35,7 +37,7 @@ public class TourExtendSrv implements ITourExtendSrv {
     }
 
     @Override
-    public Map<Integer, TourExtend> getAll() {
+    public List<TourExtend> getAll() {
         Map<Integer, TourExtend> extendTours =
                 tourDao.getAll().stream().collect(Collectors.toMap(Tour::getId, TourExtend::new));
 
@@ -56,6 +58,6 @@ public class TourExtendSrv implements ITourExtendSrv {
                     add(subjectMap.get(tourSubject.getSubjectId()));
         }
 
-        return extendTours;
+        return new ArrayList<>(extendTours.values());
     }
 }

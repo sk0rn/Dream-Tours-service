@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 public class ToursServlet extends HttpServlet {
     private ITourExtendSrv tourExtendSrv;
@@ -22,7 +22,7 @@ public class ToursServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<Integer, TourExtend> tours = tourExtendSrv.getAll();
+        List<TourExtend> tours = tourExtendSrv.getAll();
         req.setAttribute("tour_list", tours);
         req.getRequestDispatcher("/jsp/indexTours.jsp").forward(req, resp);
     }

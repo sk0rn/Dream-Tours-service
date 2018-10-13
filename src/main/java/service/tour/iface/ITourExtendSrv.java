@@ -2,9 +2,9 @@ package service.tour.iface;
 
 import pojo.TourExtend;
 
-import java.util.Map;
+import java.util.List;
 
 public interface ITourExtendSrv {
 
-    Map<Integer, TourExtend> getAll();
+    List<TourExtend> getAll();
 }
