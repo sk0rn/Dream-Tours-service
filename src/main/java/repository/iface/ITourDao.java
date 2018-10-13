@@ -12,7 +12,9 @@ public interface ITourDao {
 
     List<Tour> getAll();
 
-    List<Tour> getBySubjectId(Integer subjecId);
+    List<Tour> getAllBySubjectId(Integer subjectId);
+
+    List<Tour> getAllByPlaceId(Integer placeId);
 
     List<Tour> getByClientId(Integer clientId);
 

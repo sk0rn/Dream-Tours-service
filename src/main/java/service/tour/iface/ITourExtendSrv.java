@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ITourExtendSrv {
 
-    List<TourExtend> getAll();
+    List<TourExtend> getAllByFeature(String feature, Integer featureId);
 }

@@ -11,4 +11,8 @@ public interface ITourPlaceDao {
     List<TourPlace> getAllByTourIdPlaceId(Integer tourid, Integer plaseId);
 
     List<TourPlace> getAll();
+
+    List<TourPlace> getAllBySubjectId(Integer subjectId);
+
+    List<TourPlace> getAllByPlaceId(Integer placeId);
 }

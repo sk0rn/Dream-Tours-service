@@ -5,10 +5,10 @@ import repository.iface.*;
 import repository.impl.*;
 import service.tour.iface.ITourExtendSrv;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static constants.Consts.*;
 
 public class TourExtendSrv implements ITourExtendSrv {
     private ITourDao tourDao;
@@ -37,27 +37,59 @@ public class TourExtendSrv implements ITourExtendSrv {
     }
 
     @Override
-    public List<TourExtend> getAll() {
-        Map<Integer, TourExtend> extendTours =
-                tourDao.getAll().stream().collect(Collectors.toMap(Tour::getId, TourExtend::new));
+    public List<TourExtend> getAllByFeature(String feature, Integer featureId) {
+        Map<Integer, TourExtend> extendTours;
+        Map<Integer, Place> placeMap;
+        List<TourPlace> places;
+        Map<Integer, Subject> subjectMap;
+        List<TourSubject> subjects;
 
-
-        Map<Integer, Place> placeMap =
-                placeDao.getAll().stream().collect(Collectors.toMap(Place::getId, p -> p));
-        for (TourPlace tourPlace : tourPlaceDao.getAll()) {
-            extendTours.get(tourPlace.getTourId()).
-                            getPlaces().
-                            add(placeMap.get(tourPlace.getPlaceId()));
+        switch ("" + feature) {
+            case SUBJECT:
+                extendTours = tourDao.getAllBySubjectId(featureId).stream().
+                        collect(Collectors.toMap(Tour::getId, TourExtend::new));
+                placeMap = placeDao.getAllBySubjectId(featureId).stream().
+                        collect(Collectors.toMap(Place::getId, p -> p));
+                places = tourPlaceDao.getAllBySubjectId(featureId);
+                subjectMap = subjectDao.getAllBySubjectId(featureId).stream().
+                        collect(Collectors.toMap(Subject::getId, s -> s));
+                subjects = tourSubjectDao.getAllBySubjectId(featureId);
+                break;
+            case PLACE:
+                extendTours = tourDao.getAllByPlaceId(featureId).stream().
+                        collect(Collectors.toMap(Tour::getId, TourExtend::new));
+                placeMap = placeDao.getAllByPlaceId(featureId).stream().
+                        collect(Collectors.toMap(Place::getId, p -> p));
+                places = tourPlaceDao.getAllByPlaceId(featureId);
+                subjectMap = subjectDao.getAllByPlaceId(featureId).stream().
+                        collect(Collectors.toMap(Subject::getId, s -> s));
+                subjects = tourSubjectDao.getAllByPlaceId(featureId);
+                break;
+            default:
+                extendTours = tourDao.getAll().stream().
+                        collect(Collectors.toMap(Tour::getId, TourExtend::new));
+                placeMap = placeDao.getAll().stream().
+                        collect(Collectors.toMap(Place::getId, p -> p));
+                places = tourPlaceDao.getAll();
+                subjectMap = subjectDao.getAll().stream().
+                        collect(Collectors.toMap(Subject::getId, s -> s));
+                subjects = tourSubjectDao.getAll();
         }
 
-        Map<Integer, Subject> subjectMap =
-                subjectDao.getAll().stream().collect(Collectors.toMap(Subject::getId, s -> s));
-        for (TourSubject tourSubject : tourSubjectDao.getAll()) {
-            extendTours.get(tourSubject.getTourId()).
-                    getSubjects().
-                    add(subjectMap.get(tourSubject.getSubjectId()));
+        if (extendTours != null && placeMap != null && places != null
+                && subjectMap != null && subjects != null) {
+            for (TourPlace tourPlace : places) {
+                extendTours.get(tourPlace.getTourId()).
+                        getPlaces().
+                        add(placeMap.get(tourPlace.getPlaceId()));
+            }
+            for (TourSubject tourSubject : subjects) {
+                extendTours.get(tourSubject.getTourId()).
+                        getSubjects().
+                        add(subjectMap.get(tourSubject.getSubjectId()));
+            }
+            return new ArrayList<>(extendTours.values());
         }
-
-        return new ArrayList<>(extendTours.values());
+        return Collections.emptyList();
     }
 }

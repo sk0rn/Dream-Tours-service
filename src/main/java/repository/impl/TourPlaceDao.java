@@ -28,5 +28,27 @@ public class TourPlaceDao implements ITourPlaceDao {
         return background.fetchRowsAsPojoList("SELECT * FROM tour_place");
     }
 
+    @Override
+    public List<TourPlace> getAllBySubjectId(Integer subjectId) {
+        return background.fetchRowsAsPojoList("select distinct tour_place.*\n" +
+                "from tour_place\n" +
+                "  join tour t on tour_place.tour_id = t.id\n" +
+                "  join tour_subject ts on t.id = ts.tour_id\n" +
+                "where ts.subject_id = ?", subjectId);
+    }
+
+    /*
+    изначально берем все записи в tour_place по искомому place_id,
+    затем для id туров найденных по эти местам, получаем place_id других мест,
+    которые относятся к эти турам, оставляем только уникальные пересечения
+    */
+    @Override
+    public List<TourPlace> getAllByPlaceId(Integer placeId) {
+        return background.fetchRowsAsPojoList("select distinct tp2.*\n" +
+                "from tour_place tp\n" +
+                "  join tour_place tp2 on tp.tour_id = tp2.tour_id\n" +
+                "where tp.place_id = ?", placeId);
+    }
+
 
 }
