@@ -36,6 +36,7 @@
                                     for (Place place: tour.getPlaces()) {
                             %>
                             <a href="/tours?place=<%=place.getId()%>">
+
                                 <%=place.getName()%>
                             </a>
                             <%}%>
