@@ -22,8 +22,8 @@ public class ToursServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("allRequestsAnswer", "/tours");
-        req.setAttribute("subjects", subjectSrv.getAll());
+//        req.setAttribute("allRequestsAnswer", "/tours");
+//        req.setAttribute("subjects", subjectSrv.getAll());
         req.getRequestDispatcher("/jsp/index.jsp").forward(req, resp);
     }
 }
