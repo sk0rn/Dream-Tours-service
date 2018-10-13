@@ -13,8 +13,8 @@ public class TourReleaseDao implements ITourReleaseDao {
 
     @Override
     public boolean add(TourRelease tourRelease) {
-        return background.execute("INSERT INTO tour_release VALUES (Default, ?, ?, ?)",
-                tourRelease.getTourDurationId(), tourRelease.getBeginTime(), tourRelease.getCapacity());
+        return background.execute("INSERT INTO tour_release VALUES (Default, ?, ?, ?, ?)",
+                tourRelease.getTourId(), tourRelease.getTourDurationId(), tourRelease.getBeginTime(), tourRelease.getCapacity());
     }
 
     @Override
@@ -31,9 +31,9 @@ public class TourReleaseDao implements ITourReleaseDao {
 
     @Override
     public boolean updateById(TourRelease tourRelease) {
-        return background.execute("Update tour_release SET tour_duration_id=?, begin_time=?," +
+        return background.execute("Update tour_release SET tour_id=? tour_duration_id=?, begin_time=?," +
                         " capacity=? where id=?",
-                tourRelease.getTourDurationId(), tourRelease.getBeginTime(), tourRelease.getCapacity(),
+                tourRelease.getTourId(), tourRelease.getTourDurationId(), tourRelease.getBeginTime(), tourRelease.getCapacity(),
                 tourRelease.getId());
     }
 

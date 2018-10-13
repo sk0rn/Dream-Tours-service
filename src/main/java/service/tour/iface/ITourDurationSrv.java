@@ -15,4 +15,6 @@ public interface ITourDurationSrv {
     boolean updateById(TourDuration tourDuration);
 
     boolean deleteById(Integer id);
+
+    List<TourDuration> getAll();
 }

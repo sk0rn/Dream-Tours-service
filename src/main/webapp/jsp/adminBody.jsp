@@ -1,3 +1,5 @@
+<%@ page import="pojo.Tour" %>
+<%@ page import="pojo.TourDuration" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="row">
     <div class="col-3">
@@ -23,12 +25,16 @@
     <div class="col-8">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
-                <form action="" method="">
-                    <br><input class="form-control" type="text" placeholder="название" name="tourName">
+                <%
+                    List<Tour> tourList = (List<Tour>) request.getAttribute("tours");
+                    List<TourDuration> tourDurationList = (List<TourDuration>) request.getAttribute("tourDuration");
+                %>
+                <form action="/admin/add_content" method="post">
+                    <br><input class="form-control" type="text" placeholder="название" name="tourName" required>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1"></label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="описание"
-                                  name="descTour"></textarea>
+                                  name="descTour" required></textarea>
                     </div>
                     <label for="basic-url">Ссылка на видео:</label>
                     <div class="input-group mb-3">
@@ -47,8 +53,8 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-place" role="tabpanel" aria-labelledby="v-pills-place-tab">
-                <form action="" method="">
-                    <br><input class="form-control" type="text" placeholder="название" name="placeName">
+                <form action="/admin/add_content" method="post">
+                    <br><input class="form-control" type="text" placeholder="название" name="placeName" required>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea2"></label>
                         <textarea class="form-control" id="exampleFormControlTextarea2" rows="5" placeholder="описание"
@@ -59,8 +65,8 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-subject" role="tabpanel" aria-labelledby="v-pills-subject-tab">
-                <form action="" method="">
-                    <br><input class="form-control" type="text" placeholder="название" name="subjectName">
+                <form action="/admin/add_content" method="post">
+                    <br><input class="form-control" type="text" placeholder="название" name="subjectName" required>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea3"></label>
                         <textarea class="form-control" id="exampleFormControlTextarea3" rows="5" placeholder="описание"
@@ -71,12 +77,9 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-duration" role="tabpanel" aria-labelledby="v-pills-duration-tab">
-                <form action="" method="">
-                    <br><select class="form-control" name="tourList">
-                    <option>здесь будет список туров</option>
-                </select>
+                <form action="/admin/add_content" method="post">
                     <br><input class="form-control" type="text" placeholder="продолжительность (дней)"
-                               name="numberDays">
+                               name="numberDays" required>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea4"></label>
                         <textarea class="form-control" id="exampleFormControlTextarea4" rows="5" placeholder="описание"
@@ -87,17 +90,25 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-release" role="tabpanel" aria-labelledby="v-pills-release-tab">
-                <form action="" method="">
+                <form action="/admin/add_content" method="post">
+                    <label>Название тура:</label>
+                    <br><select class="form-control" name="tourList">
+                    <% for (Tour i : tourList) {%>
+                    <option value="<%=i.getId()%>"><%=i.getName()%>
+                    </option>
+                    <%}%><br>
+                </select><br>
+                    <label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
-                    <option>здесь будет список продолжительности туров</option>
-                </select>
-                    <br>
-                    <form>
-                        <div class="form-group">
-                            <label>Дата начала тура:</label>
-                            <input type="datetime-local" class="form-control" name="dateStart">
-                        </div>
-                    </form>
+                    <%for (TourDuration j : tourDurationList) {%>
+                    <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getDesc()%>
+                    </option>
+                    <%}%>
+                </select><br>
+                    <div class="form-group">
+                        <label>Дата начала тура:</label>
+                        <input type="datetime-local" class="form-control" name="dateStart" required>
+                    </div>
                     <br><input class="form-control" type="text" placeholder="кол-во мест" name="capacity">
                     <br>
                     <button type="submit" class="btn btn-primary">Добавить</button>
@@ -105,9 +116,13 @@
             </div>
             <div class="tab-pane fade" id="v-pills-coast" role="tabpanel" aria-labelledby="v-pills-coast-tab">
                 <form action="" method="">
+                    <br><label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
-                    <option>здесь будет список продолжительности туров</option>
-                </select>
+                    <%for (TourDuration j : tourDurationList) {%>
+                    <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getDesc()%>
+                    </option>
+                    <%}%>
+                </select><br>
                     <br><select class="form-control" name="kind">
                     <option>перелет</option>
                     <option>проживание</option>
@@ -118,7 +133,7 @@
                             <span class="input-group-text">руб</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                               name="tourCoast">
+                               name="tourCoast" required>
                         <div class="input-group-append">
                             <span class="input-group-text">.00</span>
                         </div>
