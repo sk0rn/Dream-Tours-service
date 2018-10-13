@@ -6,7 +6,7 @@ import utils.exceptions.InvalidNumberOfArgumentsException;
 public class TourCoast implements Initiable {
     private Integer id;
     private Integer tourDurationId;
-    private String kind;
+    private Boolean kind;
     private Double coast;
     private Integer clippingAge;
     private Boolean isParticipant;
@@ -15,7 +15,7 @@ public class TourCoast implements Initiable {
     }
 
     public TourCoast(Object... fileds) {
-        init();
+        init(fileds);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class TourCoast implements Initiable {
         }
         this.id = (Integer) fields[0];
         this.tourDurationId = (Integer) fields[1];
-        this.kind = (String) fields[2];
+        this.kind = (Boolean) fields[2];
         this.coast = (Double) fields[3];
         this.clippingAge = (Integer) fields[4];
         this.isParticipant = (Boolean) fields[5];
@@ -47,11 +47,11 @@ public class TourCoast implements Initiable {
         this.tourDurationId = tourDurationId;
     }
 
-    public String getKind() {
+    public Boolean getKind() {
         return kind;
     }
 
-    public void setKind(String kind) {
+    public void setKind(Boolean kind) {
         this.kind = kind;
     }
 
@@ -84,7 +84,7 @@ public class TourCoast implements Initiable {
         return "TourCoast{" +
                 "id=" + id +
                 ", tourDurationId=" + tourDurationId +
-                ", kind='" + kind + '\'' +
+                ", kind=" + kind +
                 ", coast=" + coast +
                 ", clippingAge=" + clippingAge +
                 ", isParticipant=" + isParticipant +

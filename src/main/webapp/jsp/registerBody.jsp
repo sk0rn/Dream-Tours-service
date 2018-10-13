@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="col-4" align="left">
-    <form action="/register" method="post">
+    <form action="/register" method="post" accept-charset="UTF-8">
         <%
             if (("" + request.getParameter("errorCode")).equals("errLogin")) {
         %>

@@ -16,10 +16,6 @@
                aria-controls="v-pills-release" aria-selected="false">Туристическая группа</a>
             <a class="nav-link" id="v-pills-coast-tab" data-toggle="pill" href="#v-pills-coast" role="tab"
                aria-controls="v-pills-coast" aria-selected="false">Цены</a>
-            <a class="nav-link" id="v-pills-orders-tab" data-toggle="pill" href="#v-pills-orders" role="tab"
-               aria-controls="v-pills-orders" aria-selected="false">Список заказов</a>
-            <a class="nav-link" id="v-pills-call-tab" data-toggle="pill" href="#v-pills-call" role="tab"
-               aria-controls="v-pills-call" aria-selected="false">Обратная связь</a>
         </div>
     </div>
     <div class="col-8">
@@ -29,7 +25,7 @@
                     List<Tour> tourList = (List<Tour>) request.getAttribute("tours");
                     List<TourDuration> tourDurationList = (List<TourDuration>) request.getAttribute("tourDuration");
                 %>
-                <form action="/admin/add_content" method="post">
+                <form action="/admin/add_content" method="post" enctype="multipart/form-data">
                     <br><input class="form-control" type="text" placeholder="название" name="tourName" required>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1"></label>
@@ -115,7 +111,7 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-coast" role="tabpanel" aria-labelledby="v-pills-coast-tab">
-                <form action="" method="">
+                <form action="/admin/add_content" method="post">
                     <br><label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
                     <%for (TourDuration j : tourDurationList) {%>
@@ -138,7 +134,8 @@
                             <span class="input-group-text">.00</span>
                         </div>
                     </div>
-                    <br><input class="form-control" type="text" placeholder="clipping age" name="clippingAge">
+                    <br><input class="form-control" type="text" placeholder="возраст бесплатного перелета/проживания"
+                               name="clippingAge">
                     <br>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" name="isParticipant">
@@ -146,28 +143,6 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Добавить</button>
-                </form>
-            </div>
-            <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">
-                <form action="" method="">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelectOrders"></label>
-                        <select multiple class="form-control" id="exampleFormControlSelectOrders" name="ordersSelect">
-                            <option>список заказов</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="tab-pane fade" id="v-pills-call" role="tabpanel" aria-labelledby="v-pills-call-tab">
-                <form action="" method="">
-                    <div class="form-group">
-                        <label for="exampleFormControlSelectСall"></label>
-                        <select multiple class="form-control" id="exampleFormControlSelectСall" name="callSelect">
-                            <option>список людей для обзвона</option>
-                        </select>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Удалить из списка</button>
-                    </div>
                 </form>
             </div>
         </div>
