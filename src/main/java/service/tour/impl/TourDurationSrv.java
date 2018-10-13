@@ -42,4 +42,9 @@ public class TourDurationSrv implements ITourDurationSrv {
     public boolean deleteById(Integer id) {
         return tourDurationtDao.deleteById(id);
     }
+
+    @Override
+    public List<TourDuration> getAll() {
+        return tourDurationtDao.getAll();
+    }
 }

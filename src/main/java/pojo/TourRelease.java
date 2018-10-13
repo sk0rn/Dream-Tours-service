@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 public class TourRelease implements Initiable {
     private Integer id;
+    private Integer tourId;
     private Integer tourDurationId;
     private java.sql.Timestamp beginTime;
     private Integer capacity;
@@ -20,13 +21,22 @@ public class TourRelease implements Initiable {
 
     @Override
     public void init(Object... fields) {
-        if (fields == null || fields.length != 4) {
+        if (fields == null || fields.length != 5) {
             throw new InvalidNumberOfArgumentsException();
         }
         this.id = (Integer) fields[0];
-        this.tourDurationId = (Integer) fields[1];
-        this.beginTime = (Timestamp) fields[2];
-        this.capacity = (Integer) fields[3];
+        this.tourId = (Integer) fields[1];
+        this.tourDurationId = (Integer) fields[2];
+        this.beginTime = (Timestamp) fields[3];
+        this.capacity = (Integer) fields[4];
+    }
+
+    public Integer getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(Integer tourId) {
+        this.tourId = tourId;
     }
 
     public Integer getId() {
@@ -65,6 +75,7 @@ public class TourRelease implements Initiable {
     public String toString() {
         return "TourRelease{" +
                 "id=" + id +
+                ", tourId=" + tourId +
                 ", tourDurationId=" + tourDurationId +
                 ", beginTime=" + beginTime +
                 ", capacity=" + capacity +

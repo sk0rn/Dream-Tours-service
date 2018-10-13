@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
             Integer role = loginService.getRole(login);
             req.getSession().setAttribute("login", login);
             req.getSession().setAttribute("options", role);
-            System.out.println(role);
             resp.sendRedirect("/tours");
         } else {
             // если логин не найден
