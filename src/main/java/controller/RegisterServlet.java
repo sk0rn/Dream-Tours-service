@@ -42,8 +42,8 @@ public class RegisterServlet extends HttpServlet {
                     User user = new User(null, login, UtilMD5.md5Custom(pass), 0, null, null, false, 0.0, null);
                     userSrv.add(user);
                     int userId = userSrv.getByLogin(login).getId();
-                    Contact contactPhone = new Contact(null, userId, phone);
-                    Contact contactEmail = new Contact(null, userId, email);
+                    Contact contactPhone = new Contact(null, userId, "phone:" + phone);
+                    Contact contactEmail = new Contact(null, userId, "email:" + email);
                     contactSrv.add(contactPhone);
                     contactSrv.add(contactEmail);
                     resp.sendRedirect("/?infoCode=okRegister");

@@ -3,14 +3,20 @@ package controller.admin;
 import pojo.*;
 import service.tour.iface.*;
 import service.tour.impl.*;
+import service.util.impl.AlbumSrv;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.UUID;
 
+@MultipartConfig
 public class AddContentServlet extends HttpServlet {
     private IPlaceSrv placeSrv;
     private ISubjectSrv subjectSrv;
@@ -43,9 +49,15 @@ public class AddContentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("tourName");
         if (name != null) {
-            String albumGuid = req.getParameter("imageTour");
+            String albumGuid = UUID.randomUUID().toString();
+
+            Part filePart = req.getPart("imageTour");
+            InputStream fileContent = filePart.getInputStream();
+            AlbumSrv.writeFile(fileContent, albumGuid, filePart.getSubmittedFileName());
+
             String youtubeUrl = req.getParameter("youtubeUrl");
             String desc = req.getParameter("descTour");
             Tour tour = new Tour(null, name, albumGuid, youtubeUrl, desc);
@@ -73,29 +85,40 @@ public class AddContentServlet extends HttpServlet {
             tourDurationSrv.add(tourDuration);
         }
 
-        String timestamp = req.getParameter("dateStart").replace("T", " ") + ":00";
+        String timestamp = req.getParameter("dateStart");
         if (timestamp != null) {
             String tourId = req.getParameter("tourList");
             String tourDurationId = req.getParameter("tourDurationList");
             String capacity = req.getParameter("capacity");
             TourRelease tourRelease = new TourRelease(null, Integer.parseInt(tourId),
                     Integer.parseInt(tourDurationId),
-                    Timestamp.valueOf(timestamp),
+                    Timestamp.valueOf(timestamp.replace("T", " ") + ":00"),
                     Integer.parseInt(capacity));
             tourReleaseSrv.add(tourRelease);
         }
 
-        /*String tourCoast = req.getParameter("tourCoast");
-        if(tourCoast != null) {
+        String coast = req.getParameter("tourCoast");
+        if (coast != null) {
             String tourDurationId = req.getParameter("tourDurationList");
-            String capacity = req.getParameter("capacity");
-            TourRelease tourRelease = new TourRelease(null, Integer.parseInt(tourId),
+            String kindJsp = req.getParameter("kind");
+            Boolean kind = false;
+            if ("перелет".equals(kindJsp)) {
+                kind = true;
+            }
+            String clippingAge = req.getParameter("clippingAge");
+            String isParticipantJsp = req.getParameter("isParticipant");
+            Boolean isParticipan = false;
+            if ("on".equals(isParticipantJsp)) {
+                isParticipan = true;
+            }
+            TourCoast tourCoast = new TourCoast(null,
                     Integer.parseInt(tourDurationId),
-                    Timestamp.valueOf(timestamp),
-                    Integer.parseInt(capacity));
-            tourReleaseSrv.add(tourRelease);
-        }*/
-
+                    kind,
+                    Double.parseDouble(coast),
+                    Integer.parseInt(clippingAge),
+                    isParticipan);
+            tourCoastSrv.add(tourCoast);
+        }
         resp.sendRedirect("/admin/add_content");
     }
 }
