@@ -6,13 +6,13 @@ create table if not exists users
 	login varchar(250) not null
 		constraint users_login_key
 			unique,
-	pass varchar(40) not null,
+	pass varchar(60) not null,
 	options integer,
-	fio varchar(250) not null,
+	fio varchar(250),
 	call_time timestamp,
-	subscribe boolean,
+	subscribe boolean not null default false,
 	bonus double precision,
-	album_guid varchar(40)
+	album_guid varchar(60)
 )
 ;
 
@@ -29,7 +29,7 @@ create table if not exists contact
 		constraint contact_users_id_fk
 			references users
 				on update cascade,
-	value varchar(300)
+	value varchar(300) not null
 )
 ;
 
@@ -71,7 +71,7 @@ create table if not exists subject
 	id serial not null
 		constraint subject_pkey
 			primary key,
-	name varchar(250),
+	name varchar(250) not null constraint subject_name_key unique,
 	"desc" text
 )
 ;
@@ -127,12 +127,8 @@ create table if not exists tour_duration
 	id serial not null
 		constraint tour_duration_pkey
 			primary key,
-	tour_id integer
-		constraint tour_duration_tour_id_fk
-			references tour
-				on update cascade,
-	number_days integer,
-	"desc" varchar(250)
+	number_days integer not null default 0,
+	name varchar(250)
 )
 ;
 
@@ -145,14 +141,14 @@ create table if not exists tour_coast
 	id serial not null
 		constraint tour_coast_pkey
 			primary key,
-	tour_duration_id integer not null
-		constraint tour_coast_tour_duration_id_fk
+	tour_release_id integer not null
+		constraint tour_coast_tour_release_id_fk
 			references tour_duration
 				on update cascade,
-	kind boolean,
+	kind boolean not null default true,
 	coast double precision not null,
 	clippino_age integer,
-	is_participant boolean
+	is_participant boolean not null default true
 )
 ;
 
@@ -165,14 +161,16 @@ create table if not exists tour_release
 	id serial not null
 		constraint tour_release_pkey
 			primary key,
+	tour_id integer
+		constraint tour_duration_tour_id_fk
+			references tour
+				on update cascade,
 	tour_duration_id integer
 		constraint tour_release_tour_duration_id_fk
 			references tour_duration
 				on update cascade,
-	begin_time timestamp not null
-		constraint tour_release_begin_time_key
-			unique,
-	capacity integer
+	begin_time timestamp not null,
+	capacity integer not null
 )
 ;
 
@@ -190,8 +188,6 @@ create table if not exists orders
 			references users
 				on update cascade,
 	tour_release_id integer not null
-		constraint orders_tour_release_id_key
-			unique
 		constraint order_tour_release_id_fk
 			references tour_release
 				on update cascade,
