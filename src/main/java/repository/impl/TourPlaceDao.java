@@ -22,4 +22,11 @@ public class TourPlaceDao implements ITourPlaceDao {
         return background.fetchRowsAsPojoList("SELECT * FROM tour_place " +
                 "WHERE tour_id=? and place_id = ?", tourid, plaseId);
     }
+
+    @Override
+    public List<TourPlace> getAll() {
+        return background.fetchRowsAsPojoList("SELECT * FROM tour_place");
+    }
+
+
 }

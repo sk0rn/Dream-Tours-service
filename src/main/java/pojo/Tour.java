@@ -10,6 +10,7 @@ public class Tour implements Initiable {
     private String youtubeUrl;
     private String desc;
 
+
     public Tour() {
     }
 

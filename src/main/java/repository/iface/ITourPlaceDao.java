@@ -9,4 +9,6 @@ public interface ITourPlaceDao {
     boolean add(TourPlace tourPlace);
 
     List<TourPlace> getAllByTourIdPlaceId(Integer tourid, Integer plaseId);
+
+    List<TourPlace> getAll();
 }
