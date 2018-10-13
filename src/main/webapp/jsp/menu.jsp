@@ -45,6 +45,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/tours">Все туры<span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="subjectDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Тематика</a>
@@ -96,13 +99,6 @@
         <input type="hidden" id="searchDurationBegin" name="durationFrom">
         <input type="hidden" id="searchDurationEnd" name="durationTo">
 
-<<<<<<< HEAD
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
         <input class="form-control mr-sm-2" type="search" placeholder="Фудзи саккура ..." aria-label="Search"
                name="searchString">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>

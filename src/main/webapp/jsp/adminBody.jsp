@@ -1,5 +1,6 @@
 <%@ page import="pojo.Tour" %>
 <%@ page import="pojo.TourDuration" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="row">
     <div class="col-3">
