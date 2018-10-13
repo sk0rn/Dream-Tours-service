@@ -23,7 +23,7 @@ public class ToursServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<TourExtend> tours = tourExtendSrv.getAll();
-        req.setAttribute("tour_list", tours);
+        req.setAttribute("tours", tours);
         req.getRequestDispatcher("/jsp/indexTours.jsp").forward(req, resp);
     }
 }

@@ -1,9 +1,3 @@
-create schema public
-;
-
-comment on schema public is 'standard public schema'
-;
-
 create table if not exists users
 (
 	id serial not null
@@ -43,35 +37,13 @@ create unique index if not exists contact_id_uindex
 	on contact (id)
 ;
 
-create table if not exists document
-(
-	id serial not null
-		constraint document_pkey
-			primary key,
-	client_id integer
-		constraint document_users_id_fk
-			references users
-				on update cascade,
-	file_name varchar(250) not null
-		constraint document_file_name_key
-			unique,
-	doc_type varchar(250) not null
-		constraint document_doc_type_key
-			unique
-)
-;
-
-create unique index if not exists document_id_uindex
-	on document (id)
-;
-
 create table if not exists tour
 (
 	id serial not null
 		constraint tour_pkey
 			primary key,
 	name varchar(250) not null,
-	album_guid char(40) not null,
+	album_guid char(60) not null,
 	youtube_url varchar(50),
 	"desc" text
 )
