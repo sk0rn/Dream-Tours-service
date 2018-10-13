@@ -8,7 +8,7 @@ create table if not exists users
 			unique,
 	pass varchar(40) not null,
 	options integer,
-	fio varchar(250) not null,
+	fio varchar(250),
 	call_time timestamp,
 	subscribe boolean,
 	bonus double precision,
