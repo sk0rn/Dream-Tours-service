@@ -12,6 +12,7 @@
 </button>
 
 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/admin/add_content">Добавить</a><br>
     <a class="dropdown-item" href="/login?action=logout">Выйти</a>
     Меню сотрудника.
 </div>

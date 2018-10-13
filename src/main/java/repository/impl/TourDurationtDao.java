@@ -13,8 +13,8 @@ public class TourDurationtDao implements ITourDurationtDao {
 
     @Override
     public boolean add(TourDuration tourDuration) {
-        return background.execute("INSERT INTO tour_duration VALUES (Default, ?, ?, ?)",
-                tourDuration.getTourId(), tourDuration.getNumberDays(), tourDuration.getDesc());
+        return background.execute("INSERT INTO tour_duration VALUES (Default, ?, ?)",
+                tourDuration.getNumberDays(), tourDuration.getDesc());
     }
 
     @Override
@@ -29,10 +29,15 @@ public class TourDurationtDao implements ITourDurationtDao {
     }
 
     @Override
+    public List<TourDuration> getAll() {
+        return background.fetchRowsAsPojoList("SELECT * FROM tour_duration");
+    }
+
+    @Override
     public boolean updateById(TourDuration tourDuration) {
-        return background.execute("Update tour_duration SET tour_id=?, number_days=?," +
+        return background.execute("Update tour_duration SET number_days=?," +
                         " desc=? where id=?",
-                tourDuration.getTourId(), tourDuration.getNumberDays(), tourDuration.getDesc(),
+                tourDuration.getNumberDays(), tourDuration.getDesc(),
                 tourDuration.getId());
     }
 

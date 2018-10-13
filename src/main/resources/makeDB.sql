@@ -1,9 +1,3 @@
-create schema public
-;
-
-comment on schema public is 'standard public schema'
-;
-
 create table if not exists users
 (
 	id serial not null
@@ -12,14 +6,10 @@ create table if not exists users
 	login varchar(250) not null
 		constraint users_login_key
 			unique,
-	pass varchar(40) not null
-		constraint users_pass_key
-			unique,
+	pass varchar(40) not null,
 	options integer,
-	fio varchar(250) not null
-		constraint users_fio_key
-			unique,
-	call_time timestamp not null,
+	fio varchar(250) not null,
+	call_time timestamp,
 	subscribe boolean,
 	bonus double precision,
 	album_guid varchar(40)
@@ -47,35 +37,13 @@ create unique index if not exists contact_id_uindex
 	on contact (id)
 ;
 
-create table if not exists document
-(
-	id serial not null
-		constraint document_pkey
-			primary key,
-	client_id integer
-		constraint document_users_id_fk
-			references users
-				on update cascade,
-	file_name varchar(250) not null
-		constraint document_file_name_key
-			unique,
-	doc_type varchar(250) not null
-		constraint document_doc_type_key
-			unique
-)
-;
-
-create unique index if not exists document_id_uindex
-	on document (id)
-;
-
 create table if not exists tour
 (
 	id serial not null
 		constraint tour_pkey
 			primary key,
 	name varchar(250) not null,
-	album_guid char(40) not null,
+	album_guid char(60) not null,
 	youtube_url varchar(50),
 	"desc" text
 )
@@ -159,6 +127,10 @@ create table if not exists tour_duration
 	id serial not null
 		constraint tour_duration_pkey
 			primary key,
+	tour_id integer
+		constraint tour_duration_tour_id_fk
+			references tour
+				on update cascade,
 	number_days integer,
 	"desc" varchar(250)
 )
@@ -200,11 +172,7 @@ create table if not exists tour_release
 	begin_time timestamp not null
 		constraint tour_release_begin_time_key
 			unique,
-	capacity integer,
-	tour_id integer not null
-		constraint tour_release_tour_id_fk
-			references tour
-				on update cascade
+	capacity integer
 )
 ;
 
@@ -255,3 +223,4 @@ create table if not exists participant
 create unique index if not exists participant_id_uindex
 	on participant (id)
 ;
+

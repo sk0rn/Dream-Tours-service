@@ -15,4 +15,6 @@ public interface ITourDurationtDao {
     boolean updateById(TourDuration tourDuration);
 
     boolean deleteById(Integer id);
+
+    public List<TourDuration> getAll();
 }
