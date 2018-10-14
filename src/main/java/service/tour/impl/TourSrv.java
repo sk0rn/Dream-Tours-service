@@ -31,7 +31,7 @@ public class TourSrv implements ITourSrv {
 
     @Override
     public List<Tour> getBySubjectId(Integer subjectId) {
-        return tourDao.getBySubjectId(subjectId);
+        return tourDao.getAllBySubjectId(subjectId);
     }
 
     @Override

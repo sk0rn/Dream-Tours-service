@@ -12,6 +12,10 @@ public interface ISubjectDao {
 
     List<Subject> getAll();
 
+    List<Subject> getAllBySubjectId(Integer subjectId);
+
+    List<Subject> getAllByPlaceId(Integer placeId);
+
     boolean updateById(Subject subject);
 
     boolean deleteById(Integer id);

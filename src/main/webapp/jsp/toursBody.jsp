@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="pojo.TourExtend" %>
 <%@ page import="pojo.Place" %>
+<%@ page import="pojo.Subject" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div align="center">
         <%

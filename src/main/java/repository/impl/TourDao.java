@@ -28,10 +28,17 @@ public class TourDao implements ITourDao {
     }
 
     @Override
-    public List<Tour> getBySubjectId(Integer subjecId) {
-        return background.fetchRowsAsPojoList("SELECT * FROM tour" +
+    public List<Tour> getAllBySubjectId(Integer subjectId) {
+        return background.fetchRowsAsPojoList("SELECT tour.* FROM tour" +
                 " inner join tour_subject on tour.id = tour_subject.tour_id" +
-                " WHERE tour_subject.subject_id=?", subjecId);
+                " WHERE tour_subject.subject_id=?", subjectId);
+    }
+
+    @Override
+    public List<Tour> getAllByPlaceId(Integer placeId) {
+        return background.fetchRowsAsPojoList("SELECT tour.* FROM tour\n" +
+                "  inner join tour_place tp on tour.id = tp.tour_id\n" +
+                "  WHERE tp.place_id = ?", placeId);
     }
 
     @Override
