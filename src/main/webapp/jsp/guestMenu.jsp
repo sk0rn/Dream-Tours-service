@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-    Войдите.
+    Войдите
 </button>
 
 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

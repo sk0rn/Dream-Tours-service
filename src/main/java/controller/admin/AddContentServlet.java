@@ -43,7 +43,6 @@ public class AddContentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         req.setAttribute("tours", tourSrv.getAll());
         req.setAttribute("tourDuration", tourDurationSrv.getAll());
         //Получаем id со странице туров (после нажатия на кнопку "Изменить")
