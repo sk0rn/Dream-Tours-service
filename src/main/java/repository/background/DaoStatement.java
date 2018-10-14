@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Closeable;
 import java.sql.*;
+import java.util.Map;
 
 import static constants.Consts.CATCH_EXCEPTION;
 

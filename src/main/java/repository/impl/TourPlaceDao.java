@@ -3,6 +3,7 @@ package repository.impl;
 import pojo.TourPlace;
 import repository.background.DaoBackground;
 import repository.iface.ITourPlaceDao;
+import utils.ArrayFill;
 
 import java.util.List;
 
@@ -18,9 +19,9 @@ public class TourPlaceDao implements ITourPlaceDao {
     }
 
     @Override
-    public List<TourPlace> getAllByTourIdPlaceId(Integer tourid, Integer plaseId) {
+    public List<TourPlace> getAllByTourIdPlaceId(Integer tourId, Integer placeId) {
         return background.fetchRowsAsPojoList("SELECT * FROM tour_place " +
-                "WHERE tour_id=? and place_id = ?", tourid, plaseId);
+                "WHERE tour_id=? and place_id = ?", tourId, placeId);
     }
 
     @Override
@@ -48,6 +49,32 @@ public class TourPlaceDao implements ITourPlaceDao {
                 "from tour_place tp\n" +
                 "  join tour_place tp2 on tp.tour_id = tp2.tour_id\n" +
                 "where tp.place_id = ?", placeId);
+    }
+
+    @Override
+    public List<TourPlace> searchAllByKeyword(String word) {
+        String[] params = ArrayFill.fillSameString(6, "%"+word+"%");
+        return background.fetchRowsAsPojoList("with tours1 as (\n" +
+                "with places1 as (\n" +
+                "    select id from place\n" +
+                "    where name ilike ? or descr ilike ?\n" +
+                ")\n" +
+                "  , subjects1 as (\n" +
+                "    select id from subject\n" +
+                "    where name ilike ? or descr ilike ?\n" +
+                ")\n" +
+                "select distinct tour.id\n" +
+                "from tour\n" +
+                "  left outer join tour_place as tp on tp.tour_id = tour.id\n" +
+                "  left outer join places1 on places1.id = tp.place_id\n" +
+                "  left outer join tour_subject ts on ts.tour_id = tour.id\n" +
+                "  left outer join subjects1 on subjects1.id = ts.subject_id\n" +
+                "where tour.name ilike ? or tour.descr ilike ?\n" +
+                "      or places1.id is not null\n" +
+                "      or subjects1.id is not null)\n" +
+                "select tp.*\n" +
+                "from tour_place tp\n" +
+                "inner join tours1 on tours1.id = tp.tour_id", params);
     }
 
 

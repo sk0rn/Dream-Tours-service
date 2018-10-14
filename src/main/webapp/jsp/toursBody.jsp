@@ -13,7 +13,7 @@
             <div class="form-row">
                 <div class="col-3">
                     <div class="card" style="width: 22rem;">
-                        <img class="card-img-top" src="/images?album=<%=tour.getTour().getAlbumGuid()%>&filename=01"
+                        <img class="card-img-top" src="/images?album=<%=tour.getTour().getAlbumGuid()%>"
                              alt="Card image cap" name="imgArea">
                     </div>
                 </div>
