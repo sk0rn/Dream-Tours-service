@@ -1,5 +1,5 @@
+<%@ page import="pojo.Duration" %>
 <%@ page import="pojo.Tour" %>
-<%@ page import="pojo.TourDuration" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="row">
@@ -24,7 +24,7 @@
             <div class="tab-pane fade show active" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
                 <%
                     List<Tour> tourList = (List<Tour>) request.getAttribute("tours");
-                    List<TourDuration> tourDurationList = (List<TourDuration>) request.getAttribute("tourDuration");
+                    List<Duration> durationList = (List<Duration>) request.getAttribute("duration");
                 %>
                 <form action="/admin/add_content" method="post" enctype="multipart/form-data">
                     <br><input class="form-control" type="text" placeholder="название" name="tourName" required>
@@ -97,7 +97,7 @@
                 </select><br>
                     <label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
-                    <%for (TourDuration j : tourDurationList) {%>
+                    <%for (Duration j : durationList) {%>
                     <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getDesc()%>
                     </option>
                     <%}%>
@@ -115,7 +115,7 @@
                 <form action="/admin/add_content" method="post">
                     <br><label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
-                    <%for (TourDuration j : tourDurationList) {%>
+                    <%for (Duration j : durationList) {%>
                     <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getDesc()%>
                     </option>
                     <%}%>

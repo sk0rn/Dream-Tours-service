@@ -21,12 +21,12 @@ public class TourCoastDao implements ITourCoastDao {
     @Override
     public List<TourCoast> getAllByTourDuration(Integer tourDurationId) {
         return background.fetchRowsAsPojoList("SELECT * FROM tour_coast " +
-                "WHERE tour_duration_id=?", tourDurationId);
+                "WHERE duration_id=?", tourDurationId);
     }
 
     @Override
     public boolean updateById(TourCoast tourCoast) {
-        return background.execute("Update tour_coast SET tour_duration_id=?, kind=?," +
+        return background.execute("Update tour_coast SET duration_id=?, kind=?," +
                         " coast=?, clippino_age=?, isParticipant=? where id=?",
                 tourCoast.getTourDurationId(), tourCoast.getKind(), tourCoast.getCoast(),
                 tourCoast.getClippingAge(), tourCoast.getParticipant(), tourCoast.getId());

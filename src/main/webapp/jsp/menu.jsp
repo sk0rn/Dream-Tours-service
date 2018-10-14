@@ -1,3 +1,4 @@
+<%@ page import="service.tour.impl.DurationSrv" %>
 <%@ page import="service.tour.impl.PlaceSrv" %>
 <%@ page import="service.tour.impl.SubjectSrv" %>
 <%@ page import="utils.DropDownHtmlCompiler" %>
@@ -67,6 +68,18 @@
                     <%
                         out.print(new DropDownHtmlCompiler().compileDropDown(new PlaceSrv().getAll(), (place) -> {
                             return new Object[]{place.getId(), place.getName()};
+                        }, "placeDropdown", "searchPlace"));
+                    %>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="durationDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Места</a>
+                <div class="dropdown-menu" aria-labelledby="durationDropdown">
+                    <%
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new DurationSrv().getAll(), (duration) -> {
+                            return new Object[]{duration.getId(), duration.getName()};
                         }, "placeDropdown", "searchPlace"));
                     %>
                 </div>

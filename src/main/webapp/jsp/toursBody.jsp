@@ -1,7 +1,7 @@
-<%@ page import="java.util.List" %>
-<%@ page import="pojo.TourExtend" %>
 <%@ page import="pojo.Place" %>
 <%@ page import="pojo.Subject" %>
+<%@ page import="pojo.TourExtend" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div align="center">
         <%
@@ -14,7 +14,7 @@
                 <div class="col-3">
                     <div class="card" style="width: 22rem;">
                         <img class="card-img-top" src="/images?album=<%=tour.getTour().getAlbumGuid()%>&filename=01"
-                             alt="Card image cap" name="imgArea">
+                             alt="<%=tour.getTour().getName()%>" name="imgArea">
                     </div>
                 </div>
                 <div class="col-9">
@@ -24,7 +24,8 @@
                         <%
                             for (Subject subj: tour.getSubjects()) {
                         %>
-                        <a href="/tours?subject=<%=subj.getId()%>">
+                        <a href="/tours?subject=<%=subj.getId()%>" title="<%=subj.getName()%>"
+                           data-toggle="popover" data-trigger="hover" data-content="<%=subj.getDesc()%>">
                             <%=subj.getName()%>
                         </a>
                         <%}%>
@@ -36,7 +37,8 @@
                             <%
                                     for (Place place: tour.getPlaces()) {
                             %>
-                            <a href="/tours?place=<%=place.getId()%>">
+                            <a href="/tours?place=<%=place.getId()%>" title="<%=place.getName()%>"
+                               data-toggle="popover" data-trigger="hover" data-content="<%=place.getDesc()%>">
                                 <%=place.getName()%>
                             </a>
                             <%}%>

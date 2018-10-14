@@ -25,13 +25,13 @@ public class TourReleaseDao implements ITourReleaseDao {
     @Override
     public List<TourRelease> getAllByTourId(Integer tourid) {
         return background.fetchRowsAsPojoList("SELECT * FROM tour_release" +
-                " inner join tour_duration on tour_release.tour_duration_id = tour_duration.id" +
-                " WHERE tour_duration.tour_id=?", tourid);
+                " inner join duration on tour_release.duration_id = duration.id" +
+                " WHERE duration.tour_id=?", tourid);
     }
 
     @Override
     public boolean updateById(TourRelease tourRelease) {
-        return background.execute("Update tour_release SET tour_id=? tour_duration_id=?, begin_time=?," +
+        return background.execute("Update tour_release SET tour_id=? duration_id=?, begin_time=?," +
                         " capacity=? where id=?",
                 tourRelease.getTourId(), tourRelease.getTourDurationId(), tourRelease.getBeginTime(), tourRelease.getCapacity(),
                 tourRelease.getId());

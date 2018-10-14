@@ -3,15 +3,15 @@ package pojo;
 import pojo.interfaces.Initiable;
 import utils.exceptions.InvalidNumberOfArgumentsException;
 
-public class TourDuration implements Initiable {
+public class Duration implements Initiable {
     private Integer id;
     private Integer numberDays;
-    private String desc;
+    private String name;
 
-    public TourDuration() {
+    public Duration() {
     }
 
-    public TourDuration(Object... fields) {
+    public Duration(Object... fields) {
         init(fields);
     }
 
@@ -22,7 +22,7 @@ public class TourDuration implements Initiable {
         }
         this.id = (Integer) fields[0];
         this.numberDays = (Integer) fields[1];
-        this.desc = (String) fields[2];
+        this.name = (String) fields[2];
     }
 
     public Integer getId() {
@@ -41,12 +41,12 @@ public class TourDuration implements Initiable {
         this.numberDays = numberDays;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getName() {
+        return name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class TourDuration implements Initiable {
         return "TourDuration{" +
                 "id=" + id +
                 ", numberDays=" + numberDays +
-                ", desc='" + desc + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
