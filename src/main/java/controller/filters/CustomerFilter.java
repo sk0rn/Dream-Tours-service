@@ -12,7 +12,7 @@ public class CustomerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-
+        chain.doFilter(req, resp);
     }
 
     @Override
