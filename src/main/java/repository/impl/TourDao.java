@@ -58,7 +58,7 @@ public class TourDao implements ITourDao {
 
     @Override
     public boolean update(Tour tour) {
-        return background.execute("Update tour SET name=? album_guid =?, youtube_url=?, desc=? where id=?",
+        return background.execute("Update tour SET name=?, album_guid =?, youtube_url=?, descr=? where id=?",
                 tour.getName(), tour.getAlbumGuid(), tour.getYoutubeUrl(), tour.getDesc(), tour.getId());
     }
 

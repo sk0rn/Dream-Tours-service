@@ -26,6 +26,7 @@ public class AddContentServlet extends HttpServlet {
     private ITourReleaseSrv tourReleaseSrv;
     private ITourSubjectSrv tourSubjectSrv;
     private ITourSrv tourSrv;
+    private String id;
 
     @Override
     public void init() throws ServletException {
@@ -42,26 +43,44 @@ public class AddContentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         req.setAttribute("tours", tourSrv.getAll());
         req.setAttribute("tourDuration", tourDurationSrv.getAll());
+        //Получаем id со странице туров (после нажатия на кнопку "Изменить")
+        id = req.getParameter("id");
+        if (id != null) {
+            int idTour = Integer.parseInt(id);
+            Tour tour = tourSrv.getById(idTour);
+            req.setAttribute("update", "true");
+            req.setAttribute("tourUpdate", tour);
+        }
         req.getRequestDispatcher("/jsp/indexAdmin.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+
         String name = req.getParameter("tourName");
         if (name != null) {
+            String desc = req.getParameter("descTour");
+            String youtubeUrl = req.getParameter("youtubeUrl");
             String albumGuid = UUID.randomUUID().toString();
-
             Part filePart = req.getPart("imageTour");
             InputStream fileContent = filePart.getInputStream();
             AlbumSrv.writeFile(fileContent, albumGuid, filePart.getSubmittedFileName());
-
-            String youtubeUrl = req.getParameter("youtubeUrl");
-            String desc = req.getParameter("descTour");
-            Tour tour = new Tour(null, name, albumGuid, youtubeUrl, desc);
-            tourSrv.add(tour);
+            if (id != null) {
+                Tour tour = new Tour(Integer.parseInt(id),
+                        name,
+                        tourSrv.getById(Integer.parseInt(id)).getAlbumGuid(),
+                        youtubeUrl,
+                        desc);
+                tourSrv.update(tour);
+                req.setAttribute("id", "");
+            } else {
+                Tour tour = new Tour(null, name, albumGuid, youtubeUrl, desc);
+                tourSrv.add(tour);
+            }
         }
 
         String placeName = req.getParameter("placeName");
@@ -119,6 +138,7 @@ public class AddContentServlet extends HttpServlet {
                     isParticipan);
             tourCoastSrv.add(tourCoast);
         }
+
         resp.sendRedirect("/admin/add_content");
     }
 }

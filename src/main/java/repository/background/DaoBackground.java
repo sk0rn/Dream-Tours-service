@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
@@ -90,12 +89,31 @@ public class DaoBackground<T> {
      */
     public static boolean execute(String sql, Object... params) {
         try (DaoStatement statement = new DaoStatement(sql, params)) {
-
             return statement.execute();
         } catch (SQLException e) {
             LOGGER.error(CATCH_EXCEPTION, e);
         }
         return false;
+    }
+
+
+    /**
+     * Функциональный интерфейс.
+     *
+     * @param <T>
+     */
+    interface sqlExecute<T> {
+        T execute(ResultSet resultSet) throws SQLException;
+    }
+
+    public static <T> T fetch(String sql, sqlExecute<T> executor, Object... params) {
+        try (DaoStatement statement = new DaoStatement(sql, params);
+             ResultSet resultSet = statement.executeQuery()) {
+            return executor.execute(resultSet);
+        } catch (SQLException e) {
+            LOGGER.trace(CATCH_EXCEPTION, e);
+        }
+        return null;
     }
 
     /**
@@ -118,6 +136,15 @@ public class DaoBackground<T> {
      * @return
      */
     public static Object fetchOneFieldAsObject(String sql, Object... params) {
+        return fetch(sql, resultSet -> {
+            if (resultSet != null && resultSet.next() && resultSet.getMetaData().getColumnCount() > 0) {
+                return resultSet.getObject(1);
+            } else {
+                return null;
+            }
+        }, params);
+
+/*
         try (DaoStatement statement = new DaoStatement(sql, params);
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -130,6 +157,7 @@ public class DaoBackground<T> {
             LOGGER.trace(CATCH_EXCEPTION, e);
         }
         return null;
+*/
     }
 
     /**
@@ -153,6 +181,15 @@ public class DaoBackground<T> {
      * @return
      */
     public static Object[] fetchOneRowAsObjArray(String sql, Object... params) {
+        return fetch(sql, resultSet -> {
+            if (resultSet != null && resultSet.next()) {
+                return internalObjArrayFromResultSet(resultSet);
+            } else {
+                return new Object[0];
+            }
+        }, params);
+
+/*
         try (DaoStatement statement = new DaoStatement(sql, params);
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -165,6 +202,7 @@ public class DaoBackground<T> {
             LOGGER.trace(CATCH_EXCEPTION, e);
         }
         return new Object[0];
+*/
     }
 
     /**
@@ -246,6 +284,20 @@ public class DaoBackground<T> {
     }
 
     public List<T> fetchRowsAsPojoList(String sql, Object... params) {
+        return fetch(sql, resultSet -> {
+            if (resultSet != null) {
+                List<T> pojoList = new ArrayList<>();
+
+                while (resultSet.next()) {
+                    pojoList.add(pojoMaker.apply(internalObjArrayFromResultSet(resultSet)));
+                }
+
+                return pojoList;
+            } else {
+                return Collections.emptyList();
+            }
+        }, params);
+/*
         try (DaoStatement statement = new DaoStatement(sql, params);
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -264,5 +316,6 @@ public class DaoBackground<T> {
             LOGGER.trace(CATCH_EXCEPTION, e);
         }
         return Collections.emptyList();
+        */
     }
 }
