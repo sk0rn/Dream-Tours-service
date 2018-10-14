@@ -30,7 +30,7 @@
     </servlet-mapping>
 
     <!--основная страница личного кабинета, включает данные клиента:
-    wishlist, documents, personal info, bonus points, settings, orderlist-->
+    wishlist, personal info, bonus points, settings, orderlist-->
     <servlet>
         <servlet-name>account</servlet-name>
         <servlet-class>controller.customer.CustomerServlet</servlet-class>
