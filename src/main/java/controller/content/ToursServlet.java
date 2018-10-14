@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static constants.Consts.*;
+
 public class ToursServlet extends HttpServlet {
     private ITourExtendSrv tourExtendSrv;
 
@@ -21,8 +23,18 @@ public class ToursServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<TourExtend> tours = tourExtendSrv.getAll();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        List<TourExtend> tours;
+        if (req.getParameter(SUBJECT) != null) {
+            tours = tourExtendSrv.getAllByFeature(SUBJECT, Integer.parseInt(req.getParameter(SUBJECT)));
+        } else if (req.getParameter(PLACE) != null) {
+            tours = tourExtendSrv.getAllByFeature(PLACE, Integer.parseInt(req.getParameter(PLACE)));
+        }
+        else {
+            tours = tourExtendSrv.getAllByFeature(null, null);
+        }
+
         req.setAttribute("tours", tours);
         req.getRequestDispatcher("/jsp/indexTours.jsp").forward(req, resp);
     }

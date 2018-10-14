@@ -12,6 +12,10 @@ public interface IPlaceDao {
 
     List<Place> getAll();
 
+    List<Place> getAllBySubjectId(Integer subjectId);
+
+    List<Place> getAllByPlaceId(Integer placeId);
+
     boolean updateById(Place place);
 
     boolean deleteById(Integer id);
