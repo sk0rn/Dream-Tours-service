@@ -47,7 +47,7 @@ public class SubjectDao implements ISubjectDao {
 
     @Override
     public boolean updateById(Subject subject) {
-        return background.execute("Update subject SET name=?, desc=? where id=?",
+        return background.execute("Update subject SET name=?, descr=? where id=?",
                 subject.getName(), subject.getDesc(), subject.getId());
     }
 

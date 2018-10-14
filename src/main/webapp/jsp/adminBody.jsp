@@ -28,19 +28,21 @@
                 %>
                 <form action="/admin/add_content" method="post" enctype="multipart/form-data">
                     <% Tour tour;
+                        String tourId = "";
                         String tourName = "";
                         String descTour = "";
                         String youtubeUrl = "";
                         String submit = "Добавить";
                         if ("true".equals(request.getAttribute("update"))) {
                             tour = (Tour) request.getAttribute("tourUpdate");
+                            tourId = tour.getId().toString();
                             tourName = tour.getName();
                             descTour = tour.getDesc();
                             youtubeUrl = tour.getYoutubeUrl();
                             submit = "Изменить";
                         }
                     %>
-                    <input class="form-control" type="hidden" placeholder="название" name="tourId">
+                    <input class="form-control" type="hidden" placeholder="название" name="idTour" value="<%=tourId%>">
                     <br><input class="form-control" type="text" placeholder="название" name="tourName" required
                                value="<%=tourName%>">
                     <div class="form-group">

@@ -15,7 +15,6 @@ public class AdminFilter implements Filter {
         chain.doFilter(req, resp);
     }
 
-
     @Override
     public void destroy() {
 
