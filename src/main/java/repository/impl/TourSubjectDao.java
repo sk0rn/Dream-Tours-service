@@ -46,6 +46,13 @@ public class TourSubjectDao implements ITourSubjectDao {
                 "where tp.place_id = ?", placeId);
     }
 
+    /**
+     * Метод применяет SQL запрос, использующий для поиска ключевое слово.
+     * В данном случае ключевое слово ищется в нескольких таблицах,
+     * поэтому в метод fetchRowsAsPojoList() необходимо передать столько
+     * аргументов, сколько раз в запросе используется параметров поиска.
+     * Все аргументы должны иметь одно значение - значение искомого ключевого слова
+     * */
     @Override
     public List<TourSubject> searchAllByKeyword(String word) {
         String[] params = ArrayFill.fillSameString(6, "%"+word+"%");
