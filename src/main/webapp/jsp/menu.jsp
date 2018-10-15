@@ -1,7 +1,11 @@
+<%@ page import="pojo.Duration" %>
+<%@ page import="pojo.Place" %>
+<%@ page import="pojo.Subject" %>
 <%@ page import="service.tour.impl.DurationSrv" %>
 <%@ page import="service.tour.impl.PlaceSrv" %>
 <%@ page import="service.tour.impl.SubjectSrv" %>
 <%@ page import="utils.DropDownHtmlCompiler" %>
+<%@ page import="java.util.function.Function" %>
 <%--
   Created by IntelliJ IDEA.
   User: Skazzka
@@ -54,8 +58,11 @@
                    aria-haspopup="true" aria-expanded="false">Тематика</a>
                 <div class="dropdown-menu" aria-labelledby="subjectDropdown">
                     <%
-                        out.print(new DropDownHtmlCompiler().compileDropDown(new SubjectSrv().getAll(), (subject) -> {
-                            return new Object[]{subject.getId(), subject.getName()};
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new SubjectSrv().getAll(), new Function<Subject, Object[]>() {
+                            @Override
+                            public Object[] apply(Subject subject) {
+                                return new Object[]{subject.getId(), subject.getName()};
+                            }
                         }, "subjectDropdown", "searchSubject"));
                     %>
                 </div>
@@ -66,8 +73,11 @@
                    aria-haspopup="true" aria-expanded="false">Места</a>
                 <div class="dropdown-menu" aria-labelledby="placeDropdown">
                     <%
-                        out.print(new DropDownHtmlCompiler().compileDropDown(new PlaceSrv().getAll(), (place) -> {
-                            return new Object[]{place.getId(), place.getName()};
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new PlaceSrv().getAll(), new Function<Place, Object[]>() {
+                            @Override
+                            public Object[] apply(Place place) {
+                                return new Object[]{place.getId(), place.getName()};
+                            }
                         }, "placeDropdown", "searchPlace"));
                     %>
                 </div>
@@ -75,12 +85,15 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="durationDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Места</a>
+                   aria-haspopup="true" aria-expanded="false">Длительность</a>
                 <div class="dropdown-menu" aria-labelledby="durationDropdown">
                     <%
-                        out.print(new DropDownHtmlCompiler().compileDropDown(new DurationSrv().getAll(), (duration) -> {
-                            return new Object[]{duration.getId(), duration.getName()};
-                        }, "placeDropdown", "searchPlace"));
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new DurationSrv().getAll(), new Function<Duration, Object[]>() {
+                            @Override
+                            public Object[] apply(Duration duration) {
+                                return new Object[]{duration.getId(), duration.getName()};
+                            }
+                        }, "durationDropdown", "searchDuration"));
                     %>
                 </div>
             </li>
