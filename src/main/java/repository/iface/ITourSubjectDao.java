@@ -15,4 +15,6 @@ public interface ITourSubjectDao {
     List<TourSubject> getAllBySubjectId(Integer subjectId);
 
     List<TourSubject> getAllByPlaceId(Integer placeId);
+
+    List<TourSubject> searchAllByKeyword(String word);
 }

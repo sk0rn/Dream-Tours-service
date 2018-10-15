@@ -37,7 +37,7 @@ public class TourExtendSrv implements ITourExtendSrv {
     }
 
     @Override
-    public List<TourExtend> getAllByFeature(String feature, Integer featureId) {
+    public List<TourExtend> getAllByFeature(String feature, Object searchFor) {
         Map<Integer, TourExtend> extendTours;
         Map<Integer, Place> placeMap;
         List<TourPlace> places;
@@ -46,24 +46,34 @@ public class TourExtendSrv implements ITourExtendSrv {
 
         switch ("" + feature) {
             case SUBJECT:
-                extendTours = tourDao.getAllBySubjectId(featureId).stream().
+                extendTours = tourDao.getAllBySubjectId((Integer) searchFor).stream().
                         collect(Collectors.toMap(Tour::getId, TourExtend::new));
-                placeMap = placeDao.getAllBySubjectId(featureId).stream().
+                placeMap = placeDao.getAllBySubjectId((Integer) searchFor).stream().
                         collect(Collectors.toMap(Place::getId, p -> p));
-                places = tourPlaceDao.getAllBySubjectId(featureId);
-                subjectMap = subjectDao.getAllBySubjectId(featureId).stream().
+                places = tourPlaceDao.getAllBySubjectId((Integer) searchFor);
+                subjectMap = subjectDao.getAllBySubjectId((Integer) searchFor).stream().
                         collect(Collectors.toMap(Subject::getId, s -> s));
-                subjects = tourSubjectDao.getAllBySubjectId(featureId);
+                subjects = tourSubjectDao.getAllBySubjectId((Integer) searchFor);
                 break;
             case PLACE:
-                extendTours = tourDao.getAllByPlaceId(featureId).stream().
+                extendTours = tourDao.getAllByPlaceId((Integer) searchFor).stream().
                         collect(Collectors.toMap(Tour::getId, TourExtend::new));
-                placeMap = placeDao.getAllByPlaceId(featureId).stream().
+                placeMap = placeDao.getAllByPlaceId((Integer) searchFor).stream().
                         collect(Collectors.toMap(Place::getId, p -> p));
-                places = tourPlaceDao.getAllByPlaceId(featureId);
-                subjectMap = subjectDao.getAllByPlaceId(featureId).stream().
+                places = tourPlaceDao.getAllByPlaceId((Integer) searchFor);
+                subjectMap = subjectDao.getAllByPlaceId((Integer) searchFor).stream().
                         collect(Collectors.toMap(Subject::getId, s -> s));
-                subjects = tourSubjectDao.getAllByPlaceId(featureId);
+                subjects = tourSubjectDao.getAllByPlaceId((Integer) searchFor);
+                break;
+            case KEYWORD:
+                extendTours = tourDao.searchAllByKeyword((String) searchFor).stream().
+                        collect(Collectors.toMap(Tour::getId, TourExtend::new));
+                placeMap = placeDao.getAll().stream().
+                        collect(Collectors.toMap(Place::getId, p -> p));
+                places = tourPlaceDao.searchAllByKeyword((String) searchFor);
+                subjectMap = subjectDao.getAll().stream().
+                        collect(Collectors.toMap(Subject::getId, s -> s));
+                subjects = tourSubjectDao.searchAllByKeyword((String) searchFor);
                 break;
             default:
                 extendTours = tourDao.getAll().stream().

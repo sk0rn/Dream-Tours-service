@@ -6,14 +6,15 @@
 <div align="center">
         <%
             List<TourExtend> tourList = (List<TourExtend>) request.getAttribute("tours");
-            if(tourList != null)
+
+            if(tourList != null && tourList.size() > 0)
                 for (TourExtend tour : tourList) {
         %>
         <div class="col-12" align="left">
             <div class="form-row">
                 <div class="col-3">
                     <div class="card" style="width: 22rem;">
-                        <img class="card-img-top" src="/images?album=<%=tour.getTour().getAlbumGuid()%>&filename=01"
+                        <img class="card-img-top" src="/images?album=<%=tour.getTour().getAlbumGuid()%>"
                              alt="Card image cap" name="imgArea">
                     </div>
                 </div>
@@ -45,5 +46,7 @@
                 </div>
             </div>
         </div>
+        <%} else { %>
+    <a style="color: #4736ff">К сожалению, по Вашему запросу ничего не найдено</a>
         <%}%>
 </div>

@@ -16,6 +16,8 @@ public interface ITourDao {
 
     List<Tour> getAllByPlaceId(Integer placeId);
 
+    List<Tour> searchAllByKeyword(String word);
+
     List<Tour> getByClientId(Integer clientId);
 
     List<Tour> getByOrderId(Integer orderId);
