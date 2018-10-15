@@ -52,7 +52,7 @@ public class PlaceDao implements IPlaceDao {
 
     @Override
     public boolean updateById(Place place) {
-        return background.execute("Update place SET name=?, desc=? where id=?",
+        return background.execute("Update place SET name=?, descr=? where id=?",
                 place.getName(), place.getDesc(), place.getId());
     }
 

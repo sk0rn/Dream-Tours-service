@@ -1,6 +1,9 @@
+<%@ page import="pojo.Place" %>
+<%@ page import="pojo.Subject" %>
 <%@ page import="service.tour.impl.PlaceSrv" %>
 <%@ page import="service.tour.impl.SubjectSrv" %>
 <%@ page import="utils.DropDownHtmlCompiler" %>
+<%@ page import="java.util.function.Function" %>
 <%--
   Created by IntelliJ IDEA.
   User: Skazzka
@@ -53,8 +56,11 @@
                    aria-haspopup="true" aria-expanded="false">Тематика</a>
                 <div class="dropdown-menu" aria-labelledby="subjectDropdown">
                     <%
-                        out.print(new DropDownHtmlCompiler().compileDropDown(new SubjectSrv().getAll(), (subject) -> {
-                            return new Object[]{subject.getId(), subject.getName()};
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new SubjectSrv().getAll(), new Function<Subject, Object[]>() {
+                            @Override
+                            public Object[] apply(Subject subject) {
+                                return new Object[]{subject.getId(), subject.getName()};
+                            }
                         }, "subjectDropdown", "searchSubject"));
                     %>
                 </div>
@@ -65,8 +71,11 @@
                    aria-haspopup="true" aria-expanded="false">Места</a>
                 <div class="dropdown-menu" aria-labelledby="placeDropdown">
                     <%
-                        out.print(new DropDownHtmlCompiler().compileDropDown(new PlaceSrv().getAll(), (place) -> {
-                            return new Object[]{place.getId(), place.getName()};
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new PlaceSrv().getAll(), new Function<Place, Object[]>() {
+                            @Override
+                            public Object[] apply(Place place) {
+                                return new Object[]{place.getId(), place.getName()};
+                            }
                         }, "placeDropdown", "searchPlace"));
                     %>
                 </div>

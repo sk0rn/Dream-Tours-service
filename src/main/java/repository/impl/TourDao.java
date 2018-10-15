@@ -50,15 +50,15 @@ public class TourDao implements ITourDao {
 
     @Override
     public List<Tour> getByOrderId(Integer orderId) {
-        return background.fetchRowsAsPojoList("SELECT * FROM (( inner join tour_duration on " +
-                "tour.id = tour_duration.tour_id) inner join tour_release on " +
-                "tour_duration.id = tour_release.tour_duration_id) inner join orders on " +
+        return background.fetchRowsAsPojoList("SELECT * FROM (( inner join duration on " +
+                "tour.id = duration.tour_id) inner join tour_release on " +
+                "duration.id = tour_release.duration_id) inner join orders on " +
                 "tour_release.id = orders.tour_release_id WHERE orders.id=?", orderId);
     }
 
     @Override
     public boolean update(Tour tour) {
-        return background.execute("Update tour SET name=? album_guid =?, youtube_url=?, desc=? where id=?",
+        return background.execute("Update tour SET name=?, album_guid =?, youtube_url=?, descr=? where id=?",
                 tour.getName(), tour.getAlbumGuid(), tour.getYoutubeUrl(), tour.getDesc(), tour.getId());
     }
 

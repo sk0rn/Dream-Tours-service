@@ -13,29 +13,29 @@ public class TourDurationtDao implements ITourDurationtDao {
 
     @Override
     public boolean add(TourDuration tourDuration) {
-        return background.execute("INSERT INTO tour_duration VALUES (Default, ?, ?)",
+        return background.execute("INSERT INTO duration VALUES (Default, ?, ?)",
                 tourDuration.getNumberDays(), tourDuration.getDesc());
     }
 
     @Override
     public TourDuration getById(Integer id) {
-        return background.fetchOneRowAsPojoObject("select * from tour_duration where id = ?", id);
+        return background.fetchOneRowAsPojoObject("select * from duration where id = ?", id);
     }
 
     @Override
     public List<TourDuration> getAllByTourId(Integer tourid) {
-        return background.fetchRowsAsPojoList("SELECT * FROM tour_duration " +
+        return background.fetchRowsAsPojoList("SELECT * FROM duration " +
                 "WHERE tour_id=?", tourid);
     }
 
     @Override
     public List<TourDuration> getAll() {
-        return background.fetchRowsAsPojoList("SELECT * FROM tour_duration");
+        return background.fetchRowsAsPojoList("SELECT * FROM duration");
     }
 
     @Override
     public boolean updateById(TourDuration tourDuration) {
-        return background.execute("Update tour_duration SET number_days=?," +
+        return background.execute("Update duration SET number_days=?," +
                         " desc=? where id=?",
                 tourDuration.getNumberDays(), tourDuration.getDesc(),
                 tourDuration.getId());
@@ -43,7 +43,7 @@ public class TourDurationtDao implements ITourDurationtDao {
 
     @Override
     public boolean deleteById(Integer id) {
-        return background.execute("DELETE FROM tour_duration WHERE id = ?",
+        return background.execute("DELETE FROM duration WHERE id = ?",
                 id);
     }
 }
