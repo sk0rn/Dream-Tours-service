@@ -22,7 +22,7 @@
                     if (((Integer) 1).equals(request.getSession().getAttribute("options"))) {
                 %>
                 <button type="button" class="btn-sm btn-success"
-                        onclick="document.location.href='/admin/add_content?id='<%=tour.getTour().getId()%>">Изменить
+                        onclick="document.location.href='/admin/add_content?id=<%=tour.getTour().getId()%>'">Изменить
                 </button>&nbsp;
                 <%
 
