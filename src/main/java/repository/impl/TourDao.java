@@ -3,6 +3,7 @@ package repository.impl;
 import pojo.Tour;
 import repository.background.DaoBackground;
 import repository.iface.ITourDao;
+import utils.ArrayFill;
 
 import java.util.List;
 
@@ -39,6 +40,37 @@ public class TourDao implements ITourDao {
         return background.fetchRowsAsPojoList("SELECT tour.* FROM tour\n" +
                 "  inner join tour_place tp on tour.id = tp.tour_id\n" +
                 "  WHERE tp.place_id = ?", placeId);
+    }
+
+    /**
+     * Метод применяет SQL запрос, использующий для поиска ключевое слово.
+     * В данном случае ключевое слово ищется в нескольких таблицах,
+     * поэтому в метод fetchRowsAsPojoList() необходимо передать столько
+     * аргументов, сколько раз в запросе используется параметров поиска.
+     * Все аргументы должны иметь одно значение - значение искомого ключевого слова
+    * */
+    @Override
+    public List<Tour> searchAllByKeyword(String word) {
+        String[] params = ArrayFill.fillSameString(6, "%"+word+"%");
+        return background.fetchRowsAsPojoList("with places1 as (\n" +
+                "    select id\n" +
+                "    from place\n" +
+                "    where name ilike ? or descr ilike ?\n" +
+                ")\n" +
+                "  , subjects1 as (\n" +
+                "    select id\n" +
+                "    from subject\n" +
+                "    where name ilike ? or descr ilike ?\n" +
+                ")\n" +
+                "select distinct tour.*\n" +
+                "from tour\n" +
+                "  left outer join tour_place as tp on tp.tour_id = tour.id\n" +
+                "  left outer join places1 on places1.id = tp.place_id\n" +
+                "  left outer join tour_subject ts on ts.tour_id = tour.id\n" +
+                "  left outer join subjects1 on subjects1.id = ts.subject_id\n" +
+                "where tour.name ilike ? or tour.descr ilike ?\n" +
+                "      or places1.id is not null" +
+                "      or subjects1.id is not null;", params);
     }
 
     @Override

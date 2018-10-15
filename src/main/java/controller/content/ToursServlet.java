@@ -30,6 +30,8 @@ public class ToursServlet extends HttpServlet {
             tours = tourExtendSrv.getAllByFeature(SUBJECT, Integer.parseInt(req.getParameter(SUBJECT)));
         } else if (req.getParameter(PLACE) != null) {
             tours = tourExtendSrv.getAllByFeature(PLACE, Integer.parseInt(req.getParameter(PLACE)));
+        } else if (req.getParameter(SEARCH_STRING) != null) {
+            tours = tourExtendSrv.getAllByFeature(KEYWORD, req.getParameter(SEARCH_STRING).trim());
         }
         else {
             tours = tourExtendSrv.getAllByFeature(null, null);
