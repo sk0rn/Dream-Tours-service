@@ -21,7 +21,7 @@ public class AddContentServlet extends HttpServlet {
     private IPlaceSrv placeSrv;
     private ISubjectSrv subjectSrv;
     private ITourCoastSrv tourCoastSrv;
-    private ITourDurationSrv tourDurationSrv;
+    private IDurationSrv tourDurationSrv;
     private ITourPlaceSrv tourPlaceSrv;
     private ITourReleaseSrv tourReleaseSrv;
     private ITourSubjectSrv tourSubjectSrv;
@@ -33,7 +33,7 @@ public class AddContentServlet extends HttpServlet {
         placeSrv = new PlaceSrv();
         subjectSrv = new SubjectSrv();
         tourCoastSrv = new TourCoastSrv();
-        tourDurationSrv = new TourDurationSrv();
+        tourDurationSrv = new DurationSrv();
         tourPlaceSrv = new TourPlaceSrv();
         tourReleaseSrv = new TourReleaseSrv();
         tourSubjectSrv = new TourSubjectSrv();
@@ -99,8 +99,8 @@ public class AddContentServlet extends HttpServlet {
         String numberDays = req.getParameter("numberDays");
         if (numberDays != null) {
             String descDuration = req.getParameter("descDuration");
-            TourDuration tourDuration = new TourDuration(null, Integer.parseInt(numberDays), descDuration);
-            tourDurationSrv.add(tourDuration);
+            Duration duration = new Duration(null, Integer.parseInt(numberDays), descDuration);
+            tourDurationSrv.add(duration);
         }
 
         String timestamp = req.getParameter("dateStart");

@@ -1,5 +1,3 @@
-<%@ page import="pojo.Place" %>
-<%@ page import="pojo.Subject" %>
 <%@ page import="service.tour.impl.PlaceSrv" %>
 <%@ page import="service.tour.impl.SubjectSrv" %>
 <%@ page import="utils.DropDownHtmlCompiler" %>
@@ -81,6 +79,21 @@
                 </div>
             </li>
 
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="durationDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Длительность</a>
+                <div class="dropdown-menu" aria-labelledby="durationDropdown">
+                    <%
+                        out.print(new DropDownHtmlCompiler().compileDropDown(new DurationSrv().getAll(), new Function<Duration, Object[]>() {
+                            @Override
+                            public Object[] apply(Duration duration) {
+                                return new Object[]{duration.getId(), duration.getName()};
+                            }
+                        }, "durationDropdown", "searchDuration"));
+                    %>
+                </div>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <div class="form-check">
@@ -108,7 +121,7 @@
         <input type="hidden" id="searchDurationBegin" name="durationFrom">
         <input type="hidden" id="searchDurationEnd" name="durationTo">
 
-        <input class="form-control mr-sm-2" type="search" placeholder="Фудзи сакура ..." aria-label="Search"
+        <input class="form-control mr-sm-2" type="search" placeholder="Фудзи саккура ..." aria-label="Search"
                name="searchString">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
     </form>
