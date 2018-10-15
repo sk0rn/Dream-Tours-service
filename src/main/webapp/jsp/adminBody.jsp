@@ -24,7 +24,7 @@
             <div class="tab-pane fade show active" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
                 <%
                     List<Tour> tourList = (List<Tour>) request.getAttribute("tours");
-                    List<Duration> durationList = (List<Duration>) request.getAttribute("duration");
+                    List<Duration> durationList = (List<Duration>) request.getAttribute("tourDuration");
                 %>
                 <form action="/admin/add_content" method="post" enctype="multipart/form-data">
                     <% Tour tour;
@@ -116,7 +116,7 @@
                     <label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
                     <%for (Duration j : durationList) {%>
-                    <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getDesc()%>
+                    <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getName()%>
                     </option>
                     <%}%>
                 </select><br>
@@ -134,7 +134,7 @@
                     <br><label>Продолжительность тура:</label>
                     <br><select class="form-control" name="tourDurationList">
                     <%for (Duration j : durationList) {%>
-                    <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getDesc()%>
+                    <option value="<%=j.getId()%>"><%=j.getNumberDays()%> (дней),  <%=j.getName()%>
                     </option>
                     <%}%>
                 </select><br>
