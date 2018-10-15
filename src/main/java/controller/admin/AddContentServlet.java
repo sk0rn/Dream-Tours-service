@@ -45,9 +45,9 @@ public class AddContentServlet extends HttpServlet {
         req.setAttribute("tours", tourSrv.getAll());
         req.setAttribute("tourDuration", tourDurationSrv.getAll());
         //Получаем id со странице туров (после нажатия на кнопку "Изменить")
-        String id = req.getParameter("id");
-        if (id != null) {
-            int idTour = Integer.parseInt(id);
+        String idTourStr = req.getParameter("id");
+        if (idTourStr != null) {
+            int idTour = Integer.parseInt(idTourStr);
             Tour tour = tourSrv.getById(idTour);
             req.setAttribute("update", "true");
             req.setAttribute("tourUpdate", tour);
@@ -61,17 +61,17 @@ public class AddContentServlet extends HttpServlet {
 
         String name = req.getParameter("tourName");
         if (name != null) {
-            String id = req.getParameter("idTour");
+            String idTourStr = req.getParameter("idTour");
             String desc = req.getParameter("descTour");
             String youtubeUrl = req.getParameter("youtubeUrl");
             String albumGuid = UUID.randomUUID().toString();
             Part filePart = req.getPart("imageTour");
             InputStream fileContent = filePart.getInputStream();
             AlbumSrv.writeFile(fileContent, albumGuid, filePart.getSubmittedFileName());
-            if (!"".equals(id)) {
-                Tour tour = new Tour(Integer.parseInt(id),
+            if (!"".equals(idTourStr)) {
+                Tour tour = new Tour(Integer.parseInt(idTourStr),
                         name,
-                        tourSrv.getById(Integer.parseInt(id)).getAlbumGuid(),
+                        tourSrv.getById(Integer.parseInt(idTourStr)).getAlbumGuid(),
                         youtubeUrl,
                         desc);
                 tourSrv.update(tour);
