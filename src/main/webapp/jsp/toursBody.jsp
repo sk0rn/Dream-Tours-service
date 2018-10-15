@@ -25,7 +25,6 @@
                         onclick="document.location.href='/admin/add_content?id=<%=tour.getTour().getId()%>'">Изменить
                 </button>&nbsp;
                 <%
-
                     }
                 %>
 
