@@ -6,7 +6,7 @@
 <div align="center">
     <%
         List<TourExtend> tourList = (List<TourExtend>) request.getAttribute("tours");
-        if (tourList != null)
+        if (tourList != null && tourList.size() > 0)
             for (TourExtend tour : tourList) {
     %>
     <div class="col-12" align="left">
@@ -59,5 +59,7 @@
             </div>
         </div>
     </div>
+    <%} else { %>
+    <a style="color: #4736ff">К сожалению, по Вашему запросу ничего не найдено</a>
     <%}%>
 </div>

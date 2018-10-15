@@ -125,7 +125,7 @@
         <input type="hidden" id="searchDurationBegin" name="durationFrom">
         <input type="hidden" id="searchDurationEnd" name="durationTo">
 
-        <input class="form-control mr-sm-2" type="search" placeholder="Фудзи саккура ..." aria-label="Search"
+        <input class="form-control mr-sm-2" type="search" placeholder="Фудзи сакура ..." aria-label="Search"
                name="searchString">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
     </form>
