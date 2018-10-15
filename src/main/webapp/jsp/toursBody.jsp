@@ -18,13 +18,14 @@
                 </div>
             </div>
             <div class="col-9">
-                <a><%=tour.getTour().getName()%>
+                <a href="/tour?id=<%=tour.getTour().getId()%>"><%=tour.getTour().getName()%>
                 </a><br>
                 <nobr>
                     <%
                         for (Subject subj : tour.getSubjects()) {
                     %>
-                    <a href="/tours?subject=<%=subj.getId()%>">
+                    <a href="/tours?subject=<%=subj.getId()%>" title="<%=subj.getName()%>" data-toggle="popover"
+                       data-trigger="hover">
                         <%=subj.getName()%>
                     </a>
                     <%}%>
@@ -36,7 +37,8 @@
                         <%
                             for (Place place : tour.getPlaces()) {
                         %>
-                        <a href="/tours?place=<%=place.getId()%>">
+                        <a href="/tours?place=<%=place.getId()%>" title="<%=place.getName()%>" data-toggle="popover"
+                           data-trigger="hover">
                             <%=place.getName()%>
                         </a>
                         <%}%>
