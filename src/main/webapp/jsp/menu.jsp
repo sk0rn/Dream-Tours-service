@@ -2,6 +2,8 @@
 <%@ page import="service.tour.impl.SubjectSrv" %>
 <%@ page import="utils.DropDownHtmlCompiler" %>
 <%@ page import="java.util.function.Function" %>
+<%@ page import="service.tour.impl.DurationSrv" %>
+<%@ page import="pojo.Duration" %>
 <%--
   Created by IntelliJ IDEA.
   User: Skazzka
