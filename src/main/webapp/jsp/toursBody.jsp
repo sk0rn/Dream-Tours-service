@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="pojo.TourExtend" %>
 <%@ page import="pojo.Place" %>
 <%@ page import="pojo.Subject" %>
 <%@ page import="pojo.TourExtend" %>

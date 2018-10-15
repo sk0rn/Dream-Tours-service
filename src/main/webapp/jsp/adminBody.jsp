@@ -27,11 +27,28 @@
                     List<Duration> durationList = (List<Duration>) request.getAttribute("duration");
                 %>
                 <form action="/admin/add_content" method="post" enctype="multipart/form-data">
-                    <br><input class="form-control" type="text" placeholder="название" name="tourName" required>
+                    <% Tour tour;
+                        String tourId = "";
+                        String tourName = "";
+                        String descTour = "";
+                        String youtubeUrl = "";
+                        String submit = "Добавить";
+                        if ("true".equals(request.getAttribute("update"))) {
+                            tour = (Tour) request.getAttribute("tourUpdate");
+                            tourId = tour.getId().toString();
+                            tourName = tour.getName();
+                            descTour = tour.getDesc();
+                            youtubeUrl = tour.getYoutubeUrl();
+                            submit = "Изменить";
+                        }
+                    %>
+                    <input class="form-control" type="hidden" placeholder="название" name="idTour" value="<%=tourId%>">
+                    <br><input class="form-control" type="text" placeholder="название" name="tourName" required
+                               value="<%=tourName%>">
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1"></label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="описание"
-                                  name="descTour" required></textarea>
+                                  name="descTour" required><%=descTour%></textarea>
                     </div>
                     <label for="basic-url">Ссылка на видео:</label>
                     <div class="input-group mb-3">
@@ -39,14 +56,15 @@
                             <span class="input-group-text" id="basic-addon3">https://www.youtube.com/</span>
                         </div>
                         <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-                               name="youtubeUrl">
+                               name="youtubeUrl" value="<%=youtubeUrl%>">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Добавить изображение:</label>
                         <input type="file" class="form-control-file" id="exampleFormControlFile1" name="imageTour">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary">Добавить</button>
+                    <button type="submit" class="btn btn-primary"><%=submit%>
+                    </button>
                 </form>
             </div>
             <div class="tab-pane fade" id="v-pills-place" role="tabpanel" aria-labelledby="v-pills-place-tab">
