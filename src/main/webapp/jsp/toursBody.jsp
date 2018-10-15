@@ -1,5 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="pojo.TourExtend" %>
 <%@ page import="pojo.Place" %>
 <%@ page import="pojo.Subject" %>
 <%@ page import="pojo.TourExtend" %>
@@ -20,6 +18,17 @@
                 </div>
             </div>
             <div class="col-9">
+                <%
+                    if (((Integer) 1).equals(request.getSession().getAttribute("options"))) {
+                %>
+                <button type="button" class="btn-sm btn-success"
+                        onclick="document.location.href='/admin/add_content?id='<%=tour.getTour().getId()%>">Изменить
+                </button>&nbsp;
+                <%
+
+                    }
+                %>
+
                 <a href="/tour?id=<%=tour.getTour().getId()%>"><%=tour.getTour().getName()%>
                 </a><br>
                 <nobr>
