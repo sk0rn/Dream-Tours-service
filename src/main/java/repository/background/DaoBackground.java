@@ -106,6 +106,25 @@ public class DaoBackground<T> {
         T execute(ResultSet resultSet) throws SQLException;
     }
 
+    /**
+     * Исполняет запрос sql.
+     * дженерик - возвращаемое значение зависит от
+     * параметра sqlExecute<T> executor (функциональноый интерфейс),
+     * который позволяет выполнять
+     * произвольный код внутри конструкции try catch
+     * <p>
+     * Метод имеет парметр params: Object... params
+     * Если хотя бы одно значение передано, то будет использован PreparedStatement,
+     * и все значения params будут переданы в запрос.
+     * <p>
+     * Если параметров передано не было, то используется Statement
+     *
+     * @param sql
+     * @param executor
+     * @param params
+     * @param <T>
+     * @return
+     */
     public static <T> T fetch(String sql, sqlExecute<T> executor, Object... params) {
         try (DaoStatement statement = new DaoStatement(sql, params);
              ResultSet resultSet = statement.executeQuery()) {
@@ -137,27 +156,10 @@ public class DaoBackground<T> {
      */
     public static Object fetchOneFieldAsObject(String sql, Object... params) {
         return fetch(sql, resultSet -> {
-            if (resultSet != null && resultSet.next() && resultSet.getMetaData().getColumnCount() > 0) {
-                return resultSet.getObject(1);
-            } else {
-                return null;
-            }
+            return (resultSet != null && resultSet.next() && resultSet.getMetaData().getColumnCount() > 0) ?
+                    resultSet.getObject(1) :
+                    null;
         }, params);
-
-/*
-        try (DaoStatement statement = new DaoStatement(sql, params);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            if (resultSet != null && resultSet.next() && resultSet.getMetaData().getColumnCount() > 0) {
-                return resultSet.getObject(1);
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            LOGGER.trace(CATCH_EXCEPTION, e);
-        }
-        return null;
-*/
     }
 
     /**
@@ -182,27 +184,10 @@ public class DaoBackground<T> {
      */
     public static Object[] fetchOneRowAsObjArray(String sql, Object... params) {
         return fetch(sql, resultSet -> {
-            if (resultSet != null && resultSet.next()) {
-                return internalObjArrayFromResultSet(resultSet);
-            } else {
-                return new Object[0];
-            }
+            return (resultSet != null && resultSet.next()) ?
+                    internalObjArrayFromResultSet(resultSet) :
+                    new Object[0];
         }, params);
-
-/*
-        try (DaoStatement statement = new DaoStatement(sql, params);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            if (resultSet != null && resultSet.next()) {
-                return internalObjArrayFromResultSet(resultSet);
-            } else {
-                return new Object[0];
-            }
-        } catch (SQLException e) {
-            LOGGER.trace(CATCH_EXCEPTION, e);
-        }
-        return new Object[0];
-*/
     }
 
     /**
@@ -297,25 +282,5 @@ public class DaoBackground<T> {
                 return Collections.emptyList();
             }
         }, params);
-/*
-        try (DaoStatement statement = new DaoStatement(sql, params);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            if (resultSet != null) {
-                List<T> pojoList = new ArrayList<>();
-
-                while (resultSet.next()) {
-                    pojoList.add(pojoMaker.apply(internalObjArrayFromResultSet(resultSet)));
-                }
-
-                return pojoList;
-            } else {
-                return Collections.emptyList();
-            }
-        } catch (SQLException e) {
-            LOGGER.trace(CATCH_EXCEPTION, e);
-        }
-        return Collections.emptyList();
-        */
     }
 }

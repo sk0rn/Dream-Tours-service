@@ -16,7 +16,6 @@ public class UserDao implements IUserDao {
         return background.execute("INSERT INTO users VALUES (Default, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getLogin(), user.getPassword(), user.getOption(), user.getFio(), user.getCallTime(),
                 user.getSubscribe(), user.getBonus(), user.getAlbumGuid());
-
     }
 
     @Override
