@@ -17,6 +17,15 @@ public class AlbumServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
+        if (true) {
+            try {
+                resp.sendRedirect("/static/images/" + req.getParameter("album")
+                + '/' + req.getParameter("filename"));
+            } catch (IOException e) {
+                LOGGER.error(e);
+            }
+        }
+
         List<File> files;
         File file = null;
         // если указан определенный файл, берем его
