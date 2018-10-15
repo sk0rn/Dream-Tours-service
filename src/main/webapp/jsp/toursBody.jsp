@@ -26,7 +26,8 @@
                     <%
                         for (Subject subj : tour.getSubjects()) {
                     %>
-                    <a href="/tours?subject=<%=subj.getId()%>" title="<%=subj.getName()%>" data-toggle="popover"
+                    <a href="/tours?subject=<%=subj.getId()%>" title="<%=subj.getName()%>"
+                       data-content="<%=subj.getDesc()%>" data-toggle="popover"
                        data-trigger="hover">
                         <%=subj.getName()%>
                     </a>
@@ -39,7 +40,8 @@
                         <%
                             for (Place place : tour.getPlaces()) {
                         %>
-                        <a href="/tours?place=<%=place.getId()%>" title="<%=place.getName()%>" data-toggle="popover"
+                        <a href="/tours?place=<%=place.getId()%>" title="<%=place.getName()%>"
+                           data-content="<%=place.getDesc()%>" data-toggle="popover"
                            data-trigger="hover">
                             <%=place.getName()%>
                         </a>
